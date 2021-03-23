@@ -3,8 +3,19 @@
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
+                    <label class="ninja_countdown_label">POSITION</label>
+                    <el-radio-group v-model="styles_configs.position">
+                        <el-radio :label="'top'">Top</el-radio>
+                        <el-radio :label="'bottom'">Bottom</el-radio>
+                    </el-radio-group>
+                </div>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="24">
+                <div class="ninja_countdown_item">
                     <label class="ninja_countdown_label">Timer Animation</label>
-                    <el-select v-model="val" clearable placeholder="Select" size="mini">
+                    <el-select v-model="styles_configs.animation" clearable placeholder="Select" size="mini">
                         <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -28,7 +39,7 @@
                                 <div class="color-picker">
                                     <el-color-picker
                                         size="mini" 
-                                        v-model="color" 
+                                        v-model="styles_configs.timer_color" 
                                         show-alpha>
                                     </el-color-picker>
                                 </div>
@@ -43,7 +54,7 @@
                                 <div class="color-picker">
                                     <el-color-picker
                                         size="mini" 
-                                        v-model="color" 
+                                        v-model="styles_configs.button_color" 
                                         show-alpha>
                                     </el-color-picker>
                                 </div>
@@ -58,7 +69,7 @@
                                 <div class="color-picker">
                                     <el-color-picker
                                         size="mini" 
-                                        v-model="color" 
+                                        v-model="styles_configs.background_color" 
                                         show-alpha>
                                     </el-color-picker>
                                 </div>
@@ -73,7 +84,7 @@
                                 <div class="color-picker">
                                     <el-color-picker
                                         size="mini" 
-                                        v-model="color" 
+                                        v-model="styles_configs.message_color" 
                                         show-alpha>
                                     </el-color-picker>
                                 </div>
@@ -86,90 +97,23 @@
     </div>
 </template>
 
-<style lang="scss">
-.color-customization {
-            .bgColorList {
-                width: 49%;
-                float: left;
-                max-height: 100px;
-                position: relative;
-                .el-input {
-                    width: 98%;
-                }
-            }
-
-            .textColorList {
-                width: 48%;
-                float: right;
-                .gdpr_text_color-picker {
-                    position: relative;
-                    top: -34px;
-                    left: 189px;
-                    display: block;
-                }
-            }
-
-            .btnbackground {
-                width: 48%;
-                float: left;
-                margin-top: -23px;
-                .gdpr_btn_bg_color {
-                    position: relative;
-                    top: -34px;
-                    left: 189px;
-                    display: block;
-                }
-            }
-
-            .btnColorList {
-                width: 48%;
-                float: right;
-                margin-top: -23px;
-                .gdpr_btn_bg_color {
-                    position: relative;
-                    top: -34px;
-                    left: 189px;
-                    display: block;
-                }
-            }
-        }
-
-    .bgColorList {
-        .block-container {
-            //text-align: center;
-            .title {
-                display: inline-block;
-            }
-            .color-picker {
-                display: inline-block;
-                position: absolute;
-                top: 8px;
-                .el-color-picker  {
-                    .el-color-picker__trigger {
-                        margin-left: 5px;
-                    }
-                }
-            }
-        }
-    }
-</style>
-
 <script>
 export default {
+    props:['styles_configs'],
     data() {
         return {
             val:'',
             color:'',
             activeName: "1",
             options: [{
-                value: 'Option1',
-                label: 'Option1'
+                value: 'none',
+                label: 'None'
                 }, {
-                value: 'Option2',
-                label: 'Option2'
+                value: 'flip',
+                label: 'Flip'
                 }, {
-                value: 'Option3',
-                label: 'Option3'
+                value: 'slide',
+                label: 'Slide'
             }],
         }
     }

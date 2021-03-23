@@ -51,6 +51,10 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
             $menu = new \NinjaCountdown\Menu();
             $menu->register();
 
+            // Top Level Ajax Handlers for reviews
+            $ajaxHandler = new \NinjaCountdown\Route\AdminAjaxHandler();
+            $ajaxHandler->registerEndpoints();
+
             add_action('ninjacountdown/render_admin_app', function () {
                 $adminApp = new \NinjaCountdown\View\AdminApp();
                 $adminApp->bootView();
