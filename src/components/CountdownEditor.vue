@@ -3,9 +3,6 @@
         <div class="ninja_countdown_editor" v-if="configs">
             <div class="ninja_countdown_preview">
                 <countdown :all_configs="configs"></countdown>
-
-                <!-- {{ get_timer_value(configs.timer.currentdatetime,configs.timer.time_period, configs.timer.time_unit) }} -->
-
             </div>
             <div class="ninja_countdown_settings" v-if="configs">
                 <div class="header">
@@ -93,7 +90,6 @@ export default {
 
     mounted() {
         this.getConfigs();
-        //this.get_timer_value();
     }
 }
 

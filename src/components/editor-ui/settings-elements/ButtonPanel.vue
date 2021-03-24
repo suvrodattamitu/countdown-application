@@ -13,7 +13,7 @@
                 </div>
             </el-col>
         </el-row>
-        <el-row>
+        <el-row v-if="button_configs.show_button === 'true'">
             <el-col :span="24">
                 <div class="ninja_countdown_item">
                     <label class="ninja_countdown_label">BUTTON LINK</label>
@@ -21,7 +21,7 @@
                 </div>
             </el-col>
         </el-row>
-        <el-row>
+        <el-row v-if="button_configs.show_button === 'true'">
             <el-col :span="24">
                 <div class="ninja_countdown_item">
                     <label class="ninja_countdown_label">BUTTON Text</label>
@@ -29,7 +29,7 @@
                 </div>
             </el-col>
         </el-row>
-        <el-row>
+        <el-row v-if="button_configs.show_button === 'true'">
             <el-col :span="24">
                 <div class="ninja_countdown_item">
                     <label class="ninja_countdown_label">OPEN THE LINK IN A NEW BROWSER TAB</label>

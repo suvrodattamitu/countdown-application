@@ -10,6 +10,8 @@
     position: relative;
     margin-top: 0;
     color: rgb(255, 255, 255);
+    position: absolute;
+    bottom: 0px;
 }
 
 .ninja-countdown-timer-container {
@@ -78,6 +80,11 @@
 .ninja-countdown-timer-button-container {
     display: flex;
     justify-content: center;
+    a{
+        &:link{
+            text-decoration: none;
+        }
+    }
     .ninja-countdown-timer-button {
         font-size: 12px;
         padding: 11px 34px;

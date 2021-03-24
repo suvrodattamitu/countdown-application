@@ -84,6 +84,7 @@ class AdminAjaxHandler
                 'button_color'      => '',
                 'background_color'  => '',
                 'message_color'     => '',
+                'button_text_color' => '',
                 'animation'         => 'flip'
             ),
 

@@ -64,6 +64,21 @@
                         <div class="bgColorList">
                             <div class="block-container">
                                 <div class="title">
+                                    <p>{{ 'BUTTON TEXT COLOR' }}</p>
+                                </div>
+                                <div class="color-picker">
+                                    <el-color-picker
+                                        size="mini" 
+                                        v-model="styles_configs.button_text_color" 
+                                        show-alpha>
+                                    </el-color-picker>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bgColorList">
+                            <div class="block-container">
+                                <div class="title">
                                     <p>{{ 'BACKGROUND COLOR' }}</p>
                                 </div>
                                 <div class="color-picker">
@@ -116,6 +131,60 @@ export default {
                 label: 'Slide'
             }],
         }
+    },
+
+    methods: {
+       generateCSS(prefix, styleVars) {
+                let [countdown,button] = styleVars;
+                return `
+                        /* Header Color Styling */
+                         ${prefix} {
+                            background-color: ${countdown.bg};
+                            ${countdown.position}:0;
+                        }
+                        ${prefix} .ninja-countdown-timer-header-title-text{
+                            color: ${countdown.msgColor};
+                        }
+                        ${prefix} .ninja-countdown-timer-button{
+                            background-color: ${button.bg};
+                            color: ${button.txtColor}
+                        }
+                        `
+        },
+
+        getStyleVars() {
+            let countdown,button = {};
+            countdown = {
+                bg: this.styles_configs.background_color,
+                msgColor: this.styles_configs.message_color,
+                position: this.styles_configs.position,
+            };
+            button = {
+                bg: this.styles_configs.button_color,
+                txtColor: this.styles_configs.button_text_color
+            };
+            return [countdown,button];
+        },
+
+        reloadCss() {
+            let styleVars = this.getStyleVars();
+            let countdownCss = this.generateCSS('.ninja-countdown-timer-1', styleVars);
+            jQuery('#ninja_countdown_dynamic_style').html(countdownCss);
+        }
+    },
+
+    watch: {
+        
+        styles_configs: {
+            handler(val){
+                this.reloadCss();
+            },
+            deep: true
+        }
+    },
+
+    mounted() {
+        this.reloadCss();
     }
 }
 </script>
