@@ -134,36 +134,43 @@ export default {
     },
 
     methods: {
-       generateCSS(prefix, styleVars) {
-                let [countdown,button] = styleVars;
+        
+        generateCSS(prefix, styleVars) {
+                let [countdown,button,timer] = styleVars;
                 return `
-                        /* Header Color Styling */
-                         ${prefix} {
-                            background-color: ${countdown.bg};
-                            ${countdown.position}:0;
-                        }
-                        ${prefix} .ninja-countdown-timer-header-title-text{
-                            color: ${countdown.msgColor};
-                        }
-                        ${prefix} .ninja-countdown-timer-button{
-                            background-color: ${button.bg};
-                            color: ${button.txtColor}
-                        }
-                        `
+                    /* Header Color Styling */
+                        ${prefix} {
+                        background-color: ${countdown.bg};
+                        ${countdown.position}:0;
+                    }
+                    ${prefix} .ninja-countdown-timer-header-title-text{
+                        color: ${countdown.msgColor};
+                    }
+                    ${prefix} .ninja-countdown-timer-button{
+                        background-color: ${button.bg};
+                        color: ${button.txtColor}
+                    }
+                    ${prefix} .ninja-countdown-timer-item{
+                        color: ${timer.color}
+                    }
+                    `
         },
 
         getStyleVars() {
-            let countdown,button = {};
+            let countdown,button,timer = {};
             countdown = {
                 bg: this.styles_configs.background_color,
                 msgColor: this.styles_configs.message_color,
                 position: this.styles_configs.position,
             };
+            timer = {
+                color: this.styles_configs.timer_color
+            };
             button = {
                 bg: this.styles_configs.button_color,
                 txtColor: this.styles_configs.button_text_color
             };
-            return [countdown,button];
+            return [countdown,button,timer];
         },
 
         reloadCss() {

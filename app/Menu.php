@@ -1,6 +1,7 @@
 <?php
 
 namespace NinjaCountdown;
+use NinjaCountdown\Views\View;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -69,7 +70,7 @@ class Menu
      **/
     public function render()
     {
-        do_action('ninjacountdown/render_admin_app');
+        View::render('AdminApp');
     }
 
     /**
