@@ -1,6 +1,7 @@
 <?php
 
 namespace NinjaCountdown\Route;
+use NinjaCountdown\Model\Countdown;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -18,7 +19,6 @@ class AdminAjaxHandler
     public function registerEndpoints()
     {
         add_action('wp_ajax_ninja_countdown_admin_ajax', array($this, 'handeEndPoint'));
-
     }
 
     /**
@@ -35,6 +35,7 @@ class AdminAjaxHandler
         $validRoutes = array(
 
             'get_configs' => 'getConfigs',
+            'update_configs' => 'updateConfigs',
 
         );
 
@@ -45,55 +46,24 @@ class AdminAjaxHandler
         do_action('ninjacountdown/admin_ajax_handler_catch', $route);
     }
 
-    public function testRoute() 
-    {
-
-        wp_send_json_success([
-            'message'   => 'success',
-            'platforms' => $platforms
-        ]);
-
-    }
-
     public function getConfigs() 
     {
-
-        $dateTime = current_datetime();
-        $localtime = $dateTime->getTimestamp() + $dateTime->getOffset();
-        $currentTime = gmdate('Y-m-d H:i:s', $localtime);
-
-        $config = array(
-
-            'timer' => array(
-                'time_period'   => 1,
-                'time_unit'     => 'days',
-                'message'       => 'Get 50% off before it\'s too late ⏳',
-                'currentdatetime'   => $currentTime
-            ),
-
-            'button'    => array(
-                'show_button'    => 'true',
-                'button_link'    => '',
-                'button_text'    => 'Shop Now',
-                'new_tab'        => 'true'
-            ),
-
-            'styles' => array(
-                'position'          => 'top',
-                'timer_color'       => '',
-                'button_color'      => '',
-                'background_color'  => '',
-                'message_color'     => '',
-                'button_text_color' => '',
-                'animation'         => 'flip'
-            ),
-
-        );
-
+        $data = get_option('ninja_countdown_configs',array());
+        $data = (new Countdown)->formatConfigs($data);
         wp_send_json_success([
-            'configs'   => $config
+            'configs'   => $data
         ]);
+    }
 
+    public function updateConfigs() 
+    {
+        $configs = json_decode(wp_unslash($_REQUEST['configs']));
+        $configs = json_decode(json_encode($configs), true);
+        $configs = (new Countdown)->formatConfigs($configs);
+        update_option('ninja_countdown_configs',$configs);
+        wp_send_json_success([
+            'configs'   => $configs
+        ]);
     }
 
 }

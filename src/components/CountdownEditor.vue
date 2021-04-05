@@ -6,7 +6,7 @@
             </div>
             <div class="ninja_countdown_settings" v-if="configs">
                 <div class="header">
-                    <el-button type="primary" size="mini">
+                    <el-button type="primary" size="mini" @click="updateConfigs">
                         Update
                     </el-button>
                 </div>
@@ -46,7 +46,7 @@
 
 <script>
 
-import Countdown from '../components/editor-ui/countdown/Countdown'
+import Countdown from '../components/editor-ui/countdown-timer/CountdownTimer'
 import StylePanel from '../components/editor-ui/settings-elements/StylePanel'
 import ButtonPanel from '../components/editor-ui/settings-elements/ButtonPanel'
 import TimerPanel from '../components/editor-ui/settings-elements/TimerPanel'
@@ -70,6 +70,26 @@ export default {
     },
 
     methods: {
+
+        updateConfigs() {
+            this.loading = true
+            this.$adminPost({
+                route: 'update_configs',
+                configs: JSON.stringify(this.configs)
+            })
+                .then(response => {
+                    if( response.data ) {
+                        console.log(response.data)
+                        //this.getConfigs();
+                    }
+                })
+                .fail(error => {
+                })
+                .always(() => {
+                    this.loading = false
+                });
+        },
+
         getConfigs() {
             this.loading = true
             this.$adminGet({

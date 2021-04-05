@@ -12,6 +12,12 @@
                     <div class="ninja-countdown-timer-item">
                         <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
                             <div class="ninja-countdown-timer-item-group-inner">
+                                <div class="ninja-countdown-timer-item-value-base">{{days}}</div>
+                            </div>
+                            <div class="ninja-countdown-timer-item-group-label" title="Days">Days</div>
+                        </div>
+                        <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
+                            <div class="ninja-countdown-timer-item-group-inner">
                                 <div class="ninja-countdown-timer-item-value-base">{{hours}}</div>
                             </div>
                             <div class="ninja-countdown-timer-item-group-label" title="Days">Hours</div>
@@ -59,7 +65,7 @@ export default {
             seconds: 0,
             unit: 'days',
             period: 1,
-            currentdatetime: new Date()
+            currentdatetime: this.all_configs.timer.enddatetime
         }
     },
 

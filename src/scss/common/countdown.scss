@@ -14,6 +14,26 @@
     bottom: 0px;
 }
 
+//for frontend rendering end
+.ninja_countdown_banner_bottom {
+    margin: 0px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 0px;
+    z-index: 999999999999;
+}
+
+.ninja_countdown_banner_top {
+    margin: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    padding: 0px;
+    z-index: 999999999999;
+}
+//for frontend rendering end
+
 .ninja-countdown-timer-container {
     width: 100%;
     display: flex;
@@ -55,7 +75,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 0 24px;
+            margin: 0 10px;
             .ninja-countdown-timer-item-group-inner {
                 display: flex;
                 justify-content: center;
@@ -66,11 +86,17 @@
                 border-radius: 6px;
                 border: 1px solid currentColor;
 
+                font-size: 16px !important;
+                line-height: 18px !important;
+
                 .ninja-countdown-timer-item-value {
                     background-color: transparent;
                     color: rgb(255, 255, 255);
                     font-weight: 700;
                 }
+            }
+            .ninja-countdown-timer-item-group-label{
+                font-size: 16px;
             }
         }
     }

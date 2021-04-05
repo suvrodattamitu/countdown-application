@@ -33,6 +33,7 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
             if (is_admin()) {
                 $this->adminHooks();
             }
+            $this->publicHooks();
         }
 
         public function textDomain()
@@ -64,6 +65,12 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
                     remove_all_actions('admin_notices');
                 }
             });
+        }
+
+        public function publicHooks()
+        {
+            wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
+            add_action('init', array('NinjaCountdown\Views\FrontendApp', 'render'));
         }
         
     }
