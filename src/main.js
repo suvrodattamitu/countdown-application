@@ -1,7 +1,7 @@
-import app from './elements'
-import router from './router/routes'
+import mitt from 'mitt';
+window.mitt = window.mitt || new mitt()
 
-app.mixin({
+window.NinjaCountdown.app.mixin({
     
     methods: {
         $adminGet(options) {
@@ -17,4 +17,4 @@ app.mixin({
 
 })
 
-app.use(router).mount('#ninjacountdown-app')
+window.NinjaCountdown.app.mount('#ninjacountdown-app')

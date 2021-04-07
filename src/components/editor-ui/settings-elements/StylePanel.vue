@@ -181,17 +181,21 @@ export default {
     },
 
     watch: {
-        
         styles_configs: {
             handler(val){
-                this.reloadCss();
+                window.mitt.emit('update_css')
             },
             deep: true
         }
     },
 
     mounted() {
-        this.reloadCss();
+        window.mitt.on('update_css', () => {
+            if (this.styles_configs) {
+                console.log('hi')
+                this.reloadCss();
+            }
+        });
     }
 }
 </script>

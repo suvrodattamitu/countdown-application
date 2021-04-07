@@ -1,2 +1,2 @@
-// import NinjaCountdown from './NinjaCountdown';
-// window.NinjaCountdown = new NinjaCountdown();
+import NinjaCountdown from './NinjaCountdown';
+window.NinjaCountdown = new NinjaCountdown();

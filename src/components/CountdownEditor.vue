@@ -70,7 +70,6 @@ export default {
     },
 
     methods: {
-
         updateConfigs() {
             this.loading = true
             this.$adminPost({
@@ -79,8 +78,12 @@ export default {
             })
                 .then(response => {
                     if( response.data ) {
-                        console.log(response.data)
-                        //this.getConfigs();
+                        this.$message({
+                            showClose: true,
+                            message: 'Congrats, Settings updated successfully.',
+                            type: 'success'
+                        });
+                        this.getConfigs();
                     }
                 })
                 .fail(error => {
@@ -89,7 +92,6 @@ export default {
                     this.loading = false
                 });
         },
-
         getConfigs() {
             this.loading = true
             this.$adminGet({
@@ -105,6 +107,16 @@ export default {
                 .always(() => {
                     this.loading = false
                 });
+        }
+    },
+
+    watch:{
+        'configs.styles': {
+            handler() {
+                console.log('hello')
+                window.mitt.emit('update_css')
+            },
+            deep: true
         }
     },
 

@@ -28,19 +28,51 @@ class FrontendApp
 			true
 		);
 
-        // $css = self::generateCSS( $config, $template );
+        $configs = get_option('ninja_countdown_configs',array());
+        $configs = (new Countdown)->formatConfigs($configs);
 
-		// add_action( 'wp_head', function () use ( $css ) {
-		// 	echo $css;
-		// } );
+        $css = self::generateCSS( $configs );
+
+		add_action( 'wp_head', function () use ( $css ) {
+			echo $css;
+		} );
         
-        return static::getCountdownTimerHTML();
+        return static::getCountdownTimerHTML($configs);
     }
 
-    public static function getCountdownTimerHTML()
+    public static function getCountdownTimerHTML($data)
     {
-        $data = get_option('ninja_countdown_configs',array());
-        $data = (new Countdown)->formatConfigs($data);
+       
         View::render('countdown-timer.CountdownTimer',$data);
+    }
+
+    public static function generateCSS($configs)
+    {
+        $prefix = '.ninja-countdown-timer-1';
+        ob_start();
+		?>
+
+        <style type="text/css">
+       
+            <?php echo $prefix; ?> {
+                background-color: <?php echo $configs['styles']['background_color']; ?>;
+                <?php echo $configs['styles']['position']; ?>
+            }
+            <?php echo $prefix; ?> .ninja-countdown-timer-header-title-text{
+                color: <?php echo $configs['styles']['message_color']?>;
+            }
+            <?php echo $prefix; ?> .ninja-countdown-timer-button{
+                background-color: <?php echo $configs['styles']['button_color']; ?>
+                color: <?php echo $configs['styles']['button_text_color']; ?>
+            }
+            <?php echo $prefix; ?> .ninja-countdown-timer-item{
+                color: <?php echo $configs['styles']['timer_color']; ?>
+            }
+
+        </style>
+
+		<?php
+		return ob_get_clean();
+                    
     }
 }

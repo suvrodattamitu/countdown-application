@@ -103,15 +103,15 @@ class Menu
     {
         if (isset($_GET['page']) && $_GET['page'] == 'ninjacountdown.php') {
 
+            wp_enqueue_style('ninjacountdown_admin_app', NINJACOUNTDOWN_URL . 'public/css/ninjacountdown-admin.css', array(), NINJACOUNTDOWN_VERSION);
+            wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
+
             wp_enqueue_script('ninjacountdown_boot', NINJACOUNTDOWN_URL . 'public/js/ninjacountdown-boot.js', array('jquery'), NINJACOUNTDOWN_VERSION, true);
 
             // 3rd party developers can now add their scripts here
             do_action('ninjacountdown/booting_admin_app');
 
             wp_enqueue_script('ninjacountdown_admin_app', NINJACOUNTDOWN_URL . 'public/js/ninjacountdown-admin.js', array('ninjacountdown_boot'), NINJACOUNTDOWN_VERSION, true);
-
-            wp_enqueue_style('ninjacountdown_admin_app', NINJACOUNTDOWN_URL . 'public/css/ninjacountdown-admin.css', array(), NINJACOUNTDOWN_VERSION);
-            wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
 
             $ninjacountdownAdminVars = apply_filters('ninjacountdown/admin_app_vars', array(
 
