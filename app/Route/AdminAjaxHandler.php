@@ -35,7 +35,9 @@ class AdminAjaxHandler
         $validRoutes = array(
 
             'get_configs' => 'getConfigs',
-            'update_configs' => 'updateConfigs',
+            'save_configs' => 'saveConfigs',
+            'get_settings' => 'getSettings',
+            'save_settings' => 'saveSettings',
 
         );
 
@@ -55,7 +57,7 @@ class AdminAjaxHandler
         ]);
     }
 
-    public function updateConfigs() 
+    public function saveConfigs() 
     {
         $configs = json_decode(wp_unslash($_REQUEST['configs']));
         $configs = json_decode(json_encode($configs), true);
@@ -63,6 +65,33 @@ class AdminAjaxHandler
         update_option('ninja_countdown_configs',$configs);
         wp_send_json_success([
             'configs'   => $configs
+        ]);
+    }
+
+    public static function getSettings()
+    {
+        $checked_pages = get_option('ninja_countdown_checked_pages',array());
+
+        $pages = get_pages();
+        $page_list = array(array('page_id' => '-1', 'page_title' => __('All Pages', 'ninjacountdown')));
+        if (!empty($pages) && !is_wp_error($pages)) {
+            foreach ($pages as $page) {
+                $page_list[] = array('page_id' => $page->ID . '', 'page_title' => $page->post_title ? $page->post_title : __('Untitled', 'ninjacountdown'));
+            }
+        }
+        wp_send_json_success([
+            'pages'   => $page_list,
+            'checked_pages' => $checked_pages
+        ]);
+    }
+
+    public function saveSettings()
+    {
+        $checked_pages = json_decode(wp_unslash($_REQUEST['checked_pages']));
+        $checked_pages = json_decode(json_encode($checked_pages), true);
+        update_option('ninja_countdown_checked_pages',$checked_pages);
+        wp_send_json_success([
+            'checked_pages'   => $checked_pages
         ]);
     }
 

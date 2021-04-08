@@ -75,7 +75,7 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
         public function publicHooks()
         {
             wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
-            add_action('init', array('NinjaCountdown\Views\FrontendApp', 'render'));
+            add_action('wp_footer', array('NinjaCountdown\Views\FrontendApp', 'render'));
         }
         
     }

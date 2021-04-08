@@ -20,24 +20,36 @@ class FrontendApp
 			return;
 		}
 
-        wp_enqueue_script(
-			'countdown_manager',
-			NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js',
-			array( 'jquery' ),
-			NINJACOUNTDOWN_VERSION,
-			true
-		);
+        $page_id = get_the_ID();
 
-        $configs = get_option('ninja_countdown_configs',array());
-        $configs = (new Countdown)->formatConfigs($configs);
-
-        $css = self::generateCSS( $configs );
-
-		add_action( 'wp_head', function () use ( $css ) {
-			echo $css;
-		} );
+        $checked_pages = get_option('ninja_countdown_checked_pages',array());
         
-        return static::getCountdownTimerHTML($configs);
+        $all_pages = in_array('-1', $checked_pages);
+        $specific_page = in_array($page_id, $checked_pages);
+
+        $showTimer = $all_pages || $specific_page;
+    
+        if( $showTimer ) { 
+            wp_enqueue_script(
+                'countdown_manager',
+                NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js',
+                array( 'jquery' ),
+                NINJACOUNTDOWN_VERSION,
+                true
+            );
+
+            $configs = get_option('ninja_countdown_configs',array());
+            $configs = (new Countdown)->formatConfigs($configs);
+
+            $css = self::generateCSS( $configs );
+
+            add_action( 'wp_head', function () use ( $css ) {
+                echo $css;
+            } );
+            
+            return static::getCountdownTimerHTML($configs);
+        }
+        return;
     }
 
     public static function getCountdownTimerHTML($data)

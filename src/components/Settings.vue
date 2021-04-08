@@ -1,5 +1,5 @@
 <template>
-    <div class="ninja_countdown_settings_wrapper">
+    <div class="ninja_countdown_settings_wrapper" v-loading="loading">
 
         <div class="ninja_settings_panel">
             <h2 class="ninja_header_text">Advance Settings</h2>
@@ -8,7 +8,7 @@
             <el-row class="setting_header">
                 <el-col :md="18">
                     <h2>
-                        Global Settings
+                        Show Countdown Timer
                         <el-tooltip class="item" effect="light" placement="bottom-start">
                             <template #content>
                                 <h3>Error Message Placement</h3>
@@ -25,7 +25,7 @@
                 <el-form-item>
 
                     <div>
-                        <span>Global Settings</span>
+                        <span>Pages</span>
                         <el-tooltip class="item" effect="light" placement="bottom-start">
                             <template #content>
                                 <h3>Error Message Placement</h3>
@@ -35,11 +35,11 @@
                         </el-tooltip>
                     </div>
 
-                    <div>
-                        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
+                    <div v-if="pages">
+                        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll"  @change="handleCheckAllChange">Check all</el-checkbox>
                         <div style="margin: 15px 0;"></div>
-                        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-                            <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+                        <el-checkbox-group v-model="checkedPages" @change="handleCheckedCitiesChange">
+                            <el-checkbox v-for="page in pages" :label="page.page_id" :key="page.page_title">{{page.page_title}}</el-checkbox>
                         </el-checkbox-group>
                     </div>
 
@@ -50,7 +50,7 @@
             <!--Save settings-->
             <el-row>
                 <el-col class="action-buttons clearfix mb15">
-                    <el-button size="medium" class="pull-right" type="success" icon="el-icon-success">Save Settings</el-button>
+                    <el-button size="medium" class="pull-right" type="success" icon="el-icon-success" @click="saveSettings()">Save Settings</el-button>
                 </el-col>
             </el-row>
         </div>
@@ -59,26 +59,72 @@
 </template>
 
 <script>
-  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
   export default {
     data() {
       return {
         checkAll: false,
-        checkedCities: ['Shanghai', 'Beijing'],
-        cities: cityOptions,
-        isIndeterminate: true
+        checkedPages: [],
+        pages: false,
+        isIndeterminate: false,
+        loading: false
       };
     },
     methods: {
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
+        getSettings() {
+            this.loading = true
+            this.$adminGet({
+                route: 'get_settings'
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.pages = response.data.pages
+                        this.checkedPages = response.data.checked_pages
+
+                        let checkedCount = response.data.checked_pages.length;
+                        this.checkAll = checkedCount === this.pages.length;
+                        this.isIndeterminate = checkedCount > 0 && checkedCount < this.pages.length;
+                    }
+                })
+                .fail(error => {
+                })
+                .always(() => {
+                    this.loading = false
+                });
+        },
+        saveSettings() {
+            this.loading = true
+            this.$adminPost({
+                route: 'save_settings',
+                checked_pages: JSON.stringify(this.checkedPages)
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.$message({
+                            showClose: true,
+                            message: 'Congrats, Settings updated successfully.',
+                            type: 'success'
+                        });
+                        this.getSettings();
+                    }
+                })
+                .fail(error => {
+                })
+                .always(() => {
+                    this.loading = false
+                });
+        },
+        handleCheckAllChange(val) {
+            this.checkedPages = val ? this.pages.map(value => value.page_id) : [];
+            this.isIndeterminate = false;
+        },
+        handleCheckedCitiesChange(value) {
+            let checkedCount = value.length;
+            this.checkAll = checkedCount === this.pages.length;
+            this.isIndeterminate = checkedCount > 0 && checkedCount < this.pages.length;
+        }
+    },
+    mounted() {
+        this.getSettings()
     }
   };
 </script>
