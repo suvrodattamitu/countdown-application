@@ -49,7 +49,7 @@
 
             <?php if( $button['show_button'] === 'true' ) {?>
                 <div class="ninja-countdown-timer-button-container">
-                    <a class="ninja-countdown-timer-button" href="<?php $button['button_link'] ?>" target="<?php $button['new_tab'] === 'true' ? '_blank' : '' ?>">
+                    <a class="ninja-countdown-timer-button" href="<?php echo $button['button_link']; ?>" target="<?php echo $button['new_tab'] === 'true' ? '_blank' : '' ?>">
                         <?php echo $button['button_text']; ?>
                     </a>
                 </div>

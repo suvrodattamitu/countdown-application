@@ -42,8 +42,7 @@ class FrontendApp
 
     public static function getCountdownTimerHTML($data)
     {
-       
-        View::render('countdown-timer.CountdownTimer',$data);
+        View::render('Frontend.CountdownTimer',$data);
     }
 
     public static function generateCSS($configs)
@@ -56,7 +55,7 @@ class FrontendApp
        
             <?php echo $prefix; ?> {
                 background-color: <?php echo $configs['styles']['background_color']; ?>;
-                <?php echo $configs['styles']['position']; ?>
+                <?php echo $configs['styles']['position']; ?>:0px;
             }
             <?php echo $prefix; ?> .ninja-countdown-timer-header-title-text{
                 color: <?php echo $configs['styles']['message_color']?>;
@@ -72,7 +71,6 @@ class FrontendApp
         </style>
 
 		<?php
-		return ob_get_clean();
-                    
+		return ob_get_clean();           
     }
 }

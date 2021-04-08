@@ -56,10 +56,15 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
             $ajaxHandler = new \NinjaCountdown\Route\AdminAjaxHandler();
             $ajaxHandler->registerEndpoints();
 
+            add_action('ninjacountdown/render_admin_app', function () {
+                $adminApp = new \NinjaCountdown\Views\AdminApp();
+                $adminApp->bootView();
+            });
+
             //remove all admin notice
             add_action('admin_init', function () {
                 $disablePages = [
-                    'ninjacountdown.php',
+                    'ninjacountdown',
                 ];
                 if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
                     remove_all_actions('admin_notices');

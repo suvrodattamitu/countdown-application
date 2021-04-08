@@ -107,13 +107,40 @@ export default {
                 .always(() => {
                     this.loading = false
                 });
+        },
+
+        //css generate start 
+        generateCSS(prefix) {
+            let configs = this.configs;
+            return `
+                /* Header Color Styling */
+                    ${prefix} {
+                    background-color: ${configs.styles.background_color};
+                    ${configs.styles.position}:0;
+                }
+                ${prefix} .ninja-countdown-timer-header-title-text{
+                    color: ${configs.styles.message_color};
+                }
+                ${prefix} .ninja-countdown-timer-button{
+                    background-color: ${configs.styles.button_color};
+                    color: ${configs.styles.button_text_color}
+                }
+                ${prefix} .ninja-countdown-timer-item{
+                    color: ${configs.styles.timer_color}
+                }
+             `
+        },
+
+        reloadCss() {
+            let countdownCss = this.generateCSS('.ninja-countdown-timer-1');
+            jQuery('#ninja_countdown_dynamic_style').html(countdownCss);  
         }
+        //css generate end
     },
 
     watch:{
-        'configs.styles': {
+        'configs': {
             handler() {
-                console.log('hello')
                 window.mitt.emit('update_css')
             },
             deep: true
@@ -122,6 +149,11 @@ export default {
 
     mounted() {
         this.getConfigs();
+        window.mitt.on('update_css', () => {
+            if (this.configs) {
+                this.reloadCss();
+            }
+        });
     }
 }
 

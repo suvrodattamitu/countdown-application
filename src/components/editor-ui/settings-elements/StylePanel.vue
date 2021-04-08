@@ -133,53 +133,6 @@ export default {
         }
     },
 
-    methods: {
-        
-        generateCSS(prefix, styleVars) {
-                let [countdown,button,timer] = styleVars;
-                return `
-                    /* Header Color Styling */
-                        ${prefix} {
-                        background-color: ${countdown.bg};
-                        ${countdown.position}:0;
-                    }
-                    ${prefix} .ninja-countdown-timer-header-title-text{
-                        color: ${countdown.msgColor};
-                    }
-                    ${prefix} .ninja-countdown-timer-button{
-                        background-color: ${button.bg};
-                        color: ${button.txtColor}
-                    }
-                    ${prefix} .ninja-countdown-timer-item{
-                        color: ${timer.color}
-                    }
-                    `
-        },
-
-        getStyleVars() {
-            let countdown,button,timer = {};
-            countdown = {
-                bg: this.styles_configs.background_color,
-                msgColor: this.styles_configs.message_color,
-                position: this.styles_configs.position,
-            };
-            timer = {
-                color: this.styles_configs.timer_color
-            };
-            button = {
-                bg: this.styles_configs.button_color,
-                txtColor: this.styles_configs.button_text_color
-            };
-            return [countdown,button,timer];
-        },
-
-        reloadCss() {
-            let styleVars = this.getStyleVars();
-            let countdownCss = this.generateCSS('.ninja-countdown-timer-1', styleVars);
-            jQuery('#ninja_countdown_dynamic_style').html(countdownCss);
-        }
-    },
-
     watch: {
         styles_configs: {
             handler(val){
@@ -187,15 +140,6 @@ export default {
             },
             deep: true
         }
-    },
-
-    mounted() {
-        window.mitt.on('update_css', () => {
-            if (this.styles_configs) {
-                console.log('hi')
-                this.reloadCss();
-            }
-        });
     }
 }
 </script>

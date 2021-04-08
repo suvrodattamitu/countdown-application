@@ -39,25 +39,25 @@ class Menu
             $title,
             $title,
             'manage_options',
-            'ninjacountdown.php',
+            'ninjacountdown',
             array($this, 'render'),
             $this->getIcon(),
             25
         );
-        $submenu['ninjacountdown.php']['countdown'] = array(
+        $submenu['ninjacountdown']['countdown'] = array(
             __('Design Countdown', 'ninjacountdown'),
             'manage_options',
-            'admin.php?page=ninjacountdown.php#/',
+            'admin.php?page=ninjacountdown#/',
         );
-        $submenu['ninjacountdown.php']['settings'] = array(
+        $submenu['ninjacountdown']['settings'] = array(
             __('Settings', 'ninjacountdown'),
             'manage_options',
-            'admin.php?page=ninjacountdown.php#/settings',
+            'admin.php?page=ninjacountdown#/settings',
         );
-        $submenu['ninjacountdown.php']['support'] = array(
+        $submenu['ninjacountdown']['support'] = array(
             __('Support', 'ninjacountdown'),
             'manage_options',
-            'admin.php?page=ninjacountdown.php#/support',
+            'admin.php?page=ninjacountdown#/support',
         );
     }
 
@@ -70,7 +70,7 @@ class Menu
      **/
     public function render()
     {
-        View::render('AdminApp');
+        do_action('ninjacountdown/render_admin_app');
     }
 
     /**
@@ -101,7 +101,7 @@ class Menu
      **/
     public function enqueueAssets()
     {
-        if (isset($_GET['page']) && $_GET['page'] == 'ninjacountdown.php') {
+        if (isset($_GET['page']) && $_GET['page'] == 'ninjacountdown') {
 
             wp_enqueue_style('ninjacountdown_admin_app', NINJACOUNTDOWN_URL . 'public/css/ninjacountdown-admin.css', array(), NINJACOUNTDOWN_VERSION);
             wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
