@@ -65,24 +65,18 @@ export default {
             seconds: 0,
             unit: 'days',
             period: 1,
-            currentdatetime: this.all_configs.timer.enddatetime
+            enddatetime: this.all_configs.timer.enddatetime,
+            currentdatetime: this.all_configs.timer.currentdatetime
         }
     },
 
     methods: {
 
         get_timer_value() {
-            var countDownDate = new Date(this.currentdatetime);
+            var enddatetime = new Date(this.enddatetime);
+            var currentdatetime = new Date();
 
-            let periods = {
-                days : this.period*60 * 60 * 24 * 1000,
-                hours : this.period*1000 * 60 * 60,
-                minutes : this.period*1000 * 60
-            }
-
-            countDownDate.setTime( countDownDate.getTime() + periods[this.unit] );
-
-            this.distance = countDownDate - new Date();
+            this.distance = enddatetime - currentdatetime;
 
             this.days    = Math.floor(this.distance / (1000 * 60 * 60 * 24));
             this.hours   = Math.floor((this.distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -96,49 +90,39 @@ export default {
 
         'all_configs.timer.time_period': {
             handler(val){
+                let now = new Date();
                 this.currentdatetime = new Date();
                 this.period = this.all_configs.timer.time_period;
                 this.unit = this.all_configs.timer.time_unit;
 
-                let that = this;
-                var x = setInterval(function() {
+                let periods = {
+                    days : this.period*60 * 60 * 24 * 1000,
+                    hours : this.period*1000 * 60 * 60,
+                    minutes : this.period*1000 * 60
+                }
 
-                    that.get_timer_value();
-
-                    if( that.distance <= 0 ) {
-                        that.days = 0;
-                        that.hours = 0;
-                        that.minutes = 0;
-                        that.seconds = 0;
-                        clearInterval(x);
-                    }
-                    
-                }, 1000);
-
+                this.enddatetime = now.setTime( now.getTime() + periods[this.unit] );
+                this.all_configs.timer['enddatetime'] = this.enddatetime;
             },
             deep: true
         },
 
         'all_configs.timer.time_unit': {
             handler(val){
+
+                let now = new Date();
                 this.currentdatetime = new Date();
                 this.period = this.all_configs.timer.time_period;
                 this.unit = this.all_configs.timer.time_unit;
-                let that = this;
-                var x = setInterval(function() {
 
-                    that.get_timer_value();
+                let periods = {
+                    days : this.period*60 * 60 * 24 * 1000,
+                    hours : this.period*1000 * 60 * 60,
+                    minutes : this.period*1000 * 60
+                }
 
-                    if( that.distance <= 0 ) {
-                        that.days = 0;
-                        that.hours = 0;
-                        that.minutes = 0;
-                        that.seconds = 0;
-                        clearInterval(x);
-                    }
-                    
-                }, 1000);
-
+                this.enddatetime = now.setTime( now.getTime() + periods[this.unit] );
+                this.all_configs.timer['enddatetime'] = this.enddatetime;
             },
             deep: true
         }

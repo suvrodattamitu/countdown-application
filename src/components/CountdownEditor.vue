@@ -73,7 +73,7 @@ export default {
         updateConfigs() {
             this.loading = true
             this.$adminPost({
-                route: 'update_configs',
+                route: 'save_configs',
                 configs: JSON.stringify(this.configs)
             })
                 .then(response => {

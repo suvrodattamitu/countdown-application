@@ -20,8 +20,9 @@ class Countdown
         $currentTime = gmdate('Y-m-d H:i:s', $localtime);
 
         //end date
-        $period = 1;
-        $unit   = 'days';
+        $period = isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1;
+        $unit   = isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days';
+
         $periods = [
             'days'      => $period*60 * 60 * 24 ,
             'hours'     => $period * 60 * 60,
@@ -36,8 +37,9 @@ class Countdown
                 'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
                 'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
                 'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
-                'currentdatetime'   => $currentTime,
-                'enddatetime'       =>  gmdate('Y-m-d H:i:s',$endTime)
+                'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : $currentTime,
+                'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : gmdate('Y-m-d H:i:s',$endTime),
+                'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
             ),
 
             'button'    => array(
