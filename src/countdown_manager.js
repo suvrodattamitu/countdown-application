@@ -6,7 +6,20 @@
     var minutes = 0;
     var seconds = 0;
 
-    var countdown_timer_configs = window.countdown_timer_configs
+    var countdown_timer_configs = window.countdown_timer_configs;
+
+    //close timer
+    document.getElementById('close_ninja_timer').onclick = function(){
+        //get button position
+        var position = countdown_timer_configs.styles.position;
+        let timerContainer = document.getElementsByClassName('ninja-countdown-timer');
+
+        if( position === 'top' ) {
+            timerContainer[0].classList.add('timer_hidden_top');
+        }else {
+            timerContainer[0].classList.add('timer_hidden_bottom');
+        }
+    }
 
     function get_timer_value() {
         var enddatetime = countdown_timer_configs.timer.enddatetime;

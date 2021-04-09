@@ -57,6 +57,6 @@
 
         </div>
 
-        <div class="ninja-countdown-timer-bar-close"></div>
+        <div class="ninja-countdown-timer-bar-close" id="close_ninja_timer"></div>
     </div>
 </div>
