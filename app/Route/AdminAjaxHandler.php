@@ -38,6 +38,7 @@ class AdminAjaxHandler
             'save_configs' => 'saveConfigs',
             'get_settings' => 'getSettings',
             'save_settings' => 'saveSettings',
+            'clear_configs' => 'clearConfigs'
 
         );
 
@@ -64,8 +65,17 @@ class AdminAjaxHandler
         $configs = (new Countdown)->formatConfigs($configs);
         update_option('ninja_countdown_configs',$configs);
         wp_send_json_success([
+            'message'   => __('Congrats, successfully saved!', 'ninjacountdown'),
             'configs'   => $configs
         ]);
+    }
+
+    public function clearConfigs()
+    {
+        delete_option('ninja_countdown_configs');
+        wp_send_json_success([
+            'message'   => __('Congrats, successfully cleared!', 'ninjacountdown')
+        ]); 
     }
 
     public static function getSettings()
@@ -91,6 +101,7 @@ class AdminAjaxHandler
         $checked_pages = json_decode(json_encode($checked_pages), true);
         update_option('ninja_countdown_checked_pages',$checked_pages);
         wp_send_json_success([
+            'message'   => __('Congrats, successfully saved!', 'ninjacountdown'),
             'checked_pages'   => $checked_pages
         ]);
     }

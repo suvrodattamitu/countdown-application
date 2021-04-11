@@ -101,7 +101,7 @@
                     if( response.data ) {
                         this.$message({
                             showClose: true,
-                            message: 'Congrats, Settings updated successfully.',
+                            message: response.data.message,
                             type: 'success'
                         });
                         this.getSettings();

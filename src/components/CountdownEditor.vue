@@ -6,6 +6,7 @@
             </div>
             <div class="ninja_countdown_settings" v-if="configs">
                 <div class="header">
+                    <remove @on-confirm="clearConfigs"></remove>
                     <el-button type="primary" size="mini" @click="updateConfigs">
                         Update
                     </el-button>
@@ -50,6 +51,7 @@ import Countdown from '../components/editor-ui/countdown-timer/CountdownTimer'
 import StylePanel from '../components/editor-ui/settings-elements/StylePanel'
 import ButtonPanel from '../components/editor-ui/settings-elements/ButtonPanel'
 import TimerPanel from '../components/editor-ui/settings-elements/TimerPanel'
+import Remove from '../components/editor-ui/pieces/Remove'
 
 export default {
     components:{
@@ -57,6 +59,7 @@ export default {
         StylePanel,
         TimerPanel,
         ButtonPanel,
+        Remove
     },
 
     data() {
@@ -70,6 +73,27 @@ export default {
     },
 
     methods: {
+        clearConfigs() {
+            this.loading = true
+            this.$adminPost({
+                route: 'clear_configs',
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.$message({
+                            showClose: true,
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                        this.getConfigs();
+                    }
+                })
+                .fail(error => {
+                })
+                .always(() => {
+                    this.loading = false
+                });
+        },
         updateConfigs() {
             this.loading = true
             this.$adminPost({
@@ -80,7 +104,7 @@ export default {
                     if( response.data ) {
                         this.$message({
                             showClose: true,
-                            message: 'Congrats, Settings updated successfully.',
+                            message: response.data.message,
                             type: 'success'
                         });
                         this.getConfigs();
