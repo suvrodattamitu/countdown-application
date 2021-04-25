@@ -30,24 +30,31 @@ class FrontendApp
         $showTimer = $all_pages || $specific_page;
     
         if( $showTimer ) { 
-            wp_enqueue_script(
-                'countdown_manager',
-                NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js',
-                array( 'jquery' ),
-                NINJACOUNTDOWN_VERSION,
-                true
-            );
-
             $configs = get_option('ninja_countdown_configs',array());
             $configs = (new Countdown)->formatConfigs($configs);
 
-            $css = self::generateCSS( $configs );
+            $enddatetime = ($configs['timer']['enddatetime']);
+            $now = time()*1000;
+            $distance = $enddatetime - $now;
 
-            add_action( 'wp_head', function () use ( $css ) {
-                echo $css;
-            } );
-            
-            return static::getCountdownTimerHTML($configs);
+            //dont load assets if the time is ended
+            if( $distance> 0 ) {
+                wp_enqueue_script(
+                    'countdown_manager',
+                    NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js',
+                    array( 'jquery' ),
+                    NINJACOUNTDOWN_VERSION,
+                    true
+                );
+
+                $css = self::generateCSS( $configs );
+
+                add_action( 'wp_head', function () use ( $css ) {
+                    echo $css;
+                } );
+                
+                return static::getCountdownTimerHTML($configs);
+            }
         }
         return;
     }

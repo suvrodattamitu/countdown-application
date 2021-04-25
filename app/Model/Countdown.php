@@ -14,10 +14,7 @@ class Countdown
 {
     public function formatConfigs($configs = array())
     {
-
         $dateTime = current_datetime();
-        $localtime = $dateTime->getTimestamp() + $dateTime->getOffset();
-        $currentTime = gmdate('Y-m-d H:i:s', $localtime);
 
         //end date
         $period = isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1;
@@ -29,16 +26,15 @@ class Countdown
             'minutes'   => $period * 60
         ];
 
-        $endTime = strtotime($currentTime) + $periods[$unit];
+        $endTime = time() + $periods[$unit];
 
-        $data = array(
-
+        return array(
             'timer' => array(
                 'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
                 'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
                 'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
-                'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : $currentTime,
-                'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : gmdate('Y-m-d H:i:s',$endTime),
+                'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
+                'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
                 'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
             ),
 
@@ -58,9 +54,6 @@ class Countdown
                 'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '',
                 'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
             )
-
-        );
-        return $data;
-        
+        );        
     }
 }

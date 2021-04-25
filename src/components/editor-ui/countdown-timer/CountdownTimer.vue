@@ -95,6 +95,21 @@ export default {
                 this.period = this.all_configs.timer.time_period;
                 this.unit = this.all_configs.timer.time_unit;
 
+                let that = this;
+                var x = setInterval(function() {
+
+                    that.get_timer_value();
+
+                    if( that.distance <= 0 ) {
+                        that.days = 0;
+                        that.hours = 0;
+                        that.minutes = 0;
+                        that.seconds = 0;
+                        clearInterval(x);
+                    }
+                    
+                }, 1000);
+
                 let periods = {
                     days : this.period*60 * 60 * 24 * 1000,
                     hours : this.period*1000 * 60 * 60,
@@ -114,6 +129,21 @@ export default {
                 this.currentdatetime = new Date();
                 this.period = this.all_configs.timer.time_period;
                 this.unit = this.all_configs.timer.time_unit;
+
+                let that = this;
+                var x = setInterval(function() {
+
+                    that.get_timer_value();
+
+                    if( that.distance <= 0 ) {
+                        that.days = 0;
+                        that.hours = 0;
+                        that.minutes = 0;
+                        that.seconds = 0;
+                        clearInterval(x);
+                    }
+                    
+                }, 1000);
 
                 let periods = {
                     days : this.period*60 * 60 * 24 * 1000,

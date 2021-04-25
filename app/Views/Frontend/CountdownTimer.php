@@ -1,4 +1,4 @@
-<div class="ninja-countdown-timer ninja-countdown-timer-1 ninja_countdown_banner_<?php echo $styles['position']; ?>">
+<div id="countdown-timer-wrapper" class="ninja-countdown-timer ninja-countdown-timer-1 ninja_countdown_banner_<?php echo $styles['position']; ?>">
     <div class="ninja-countdown-timer-container">
         <div class="ninja-countdown-timer">
             <div class="ninja-countdown-timer-header">
@@ -20,27 +20,27 @@
                 <div class="ninja-countdown-timer-item">
                     <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
                         <div class="ninja-countdown-timer-item-group-inner">
-                            <div class="ninja-countdown-timer-item-value-base" id="days">5</div>
+                            <div class="ninja-countdown-timer-item-value-base" id="days">0</div>
                         </div>
                         <div class="ninja-countdown-timer-item-group-label" title="Days">Days</div>
                     </div>
                     <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
                         <div class="ninja-countdown-timer-item-group-inner">
-                            <div class="ninja-countdown-timer-item-value-base" id="hours">5</div>
+                            <div class="ninja-countdown-timer-item-value-base" id="hours">0</div>
                         </div>
                         <div class="ninja-countdown-timer-item-group-label" title="Days">Hours</div>
                     </div>
 
                     <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
                         <div class="ninja-countdown-timer-item-group-inner">
-                            <div class="ninja-countdown-timer-item-value-base" id="minutes">5</div>
+                            <div class="ninja-countdown-timer-item-value-base" id="minutes">0</div>
                         </div>
                         <div class="ninja-countdown-timer-item-group-label" title="Days">Minutes</div>
                     </div>
 
                     <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
                         <div class="ninja-countdown-timer-item-group-inner">
-                            <div class="ninja-countdown-timer-item-value-base" id="seconds">6</div>
+                            <div class="ninja-countdown-timer-item-value-base" id="seconds">0</div>
                         </div>
                         <div class="ninja-countdown-timer-item-group-label" title="Days">Seconds</div>
                     </div>

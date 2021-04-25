@@ -31,6 +31,13 @@
         minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
+        if(distance<=0) {
+            days = 0;
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+        }
+        
         document.getElementById("days").innerHTML = days;
         document.getElementById("hours").innerHTML = hours;
         document.getElementById("minutes").innerHTML = minutes;
@@ -40,10 +47,7 @@
     var x = setInterval(function() {
         get_timer_value();
         if( distance <= 0 ) {
-            days = 0;
-            hours = 0;
-            minutes = 0;
-            seconds = 0;
+            document.getElementById('countdown-timer-wrapper').remove();
             clearInterval(x);
         }
     }, 1000);
