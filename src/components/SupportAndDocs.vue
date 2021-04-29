@@ -2,12 +2,12 @@
     <div>
         <el-row>
             <el-col v-for="(item, i) in items" :key="i" :xs="24" :md="8">
-              <div class="wpsr_support_block_with_img">
+              <div class="ninja_countdown_docs_wrap">
                 <img :src="assets_url+item.img" alt="" />
-                <div class="wpsr_support_block_header">
+                <div class="ninja_countdown_docs_title">
                   <h3>{{ item.title }}</h3>
                 </div>
-                <div class="wpsr_support_block_body">
+                <div class="ninja_countdown_docs_description">
                   <p>
                     {{ item.des }}
                   </p>
@@ -35,22 +35,22 @@ export default {
                 support1: {
                     title: 'Need Help?',
                     des: 'Stuck with something? Get help from Our EXPERTS.',
-                    url: 'https://ninjacountdown.com/support',
-                    img: '/images/support1/support.png',
+                    url: 'https://fluentmanagement.fluentpos.com/support',
+                    img: '/images/support/support.png',
                     btn: 'Contact Support'
                 },
                 support2: {
                     title: 'Love this Plugin?',
                     des: 'Please write a review. We appreciate it!',
-                    url: 'https://wordpress.org/support/plugin/ninjacountdown/#new-post',
-                    img: '/images/support1/heart.png',
+                    url: 'https://fluentmanagement.fluentpos.com/support',
+                    img: '/images/support/heart.png',
                     btn: 'Write a Review'
                 },
                 support3: {
                     title: 'Found a Bug?',
                     des: 'Please report us. We will fix it as soon as possible',
-                    url: 'https://ninjacountdown.com/support',
-                    img: '/images/support1/bug.png',
+                    url: 'https://fluentmanagement.fluentpos.com/support',
+                    img: '/images/support/bug.png',
                     btn: 'Let us know'
                 }
             }

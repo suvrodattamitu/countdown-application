@@ -11,8 +11,8 @@
                         Show Countdown Timer
                         <el-tooltip class="item" effect="light" placement="bottom-start">
                             <template #content>
-                                <h3>Error Message Placement</h3>
-                                <p>These Settings will be used as default settings of a new form.<br/>You can customize layout settings for each page from form's settings page</p>
+                                <h3>Where to place the timer?</h3>
+                                <p>These Settings is for showing your Countdown timer in specific pages.<br/>You can customize settings for each page</p>
                             </template>
                             <i class="el-icon-info el-text-info"></i>
                         </el-tooltip>
@@ -25,14 +25,7 @@
                 <el-form-item>
 
                     <div>
-                        <span>Pages</span>
-                        <el-tooltip class="item" effect="light" placement="bottom-start">
-                            <template #content>
-                                <h3>Error Message Placement</h3>
-                                <p>These Settings will be used as default settings of a new form.<br/>You can customize layout settings for each page from form's settings page</p>
-                            </template>
-                            <i class="el-icon-info el-text-info"></i>
-                        </el-tooltip>
+                        <span>Pages :</span>
                     </div>
 
                     <div v-if="pages">

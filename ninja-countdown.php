@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Ninja Countdown
- * Plugin URI: https://wordpress.org/plugins/ninja-countdown/
- * Description: NInja Countdown - is an easiest alternative to add business countdown functionalities on your website.
- * Author: Suvro
- * Author URI: https://ninja-countdown.com/
+ * Plugin URI: 
+ * Description: NInja Countdown - is an fastest and easiest alternative to add business countdown functionalities on your website.
+ * Author: Light Plugins
+ * Author URI: 
  * License: GPLv2 or later
  * Version: 1.3.1
  * Text Domain: ninjacountdown
@@ -74,20 +74,12 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
 
         public function publicHooks()
         {
-            wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
             add_action('wp_footer', array('NinjaCountdown\Views\FrontendApp', 'render'));
         }
-        
     }
 
     add_action('plugins_loaded', function () {
         (new NinjaCountdown())->boot();
-    });
-
-    register_activation_hook(NINJACOUNTDOWN_MAIN_FILE, function ($netWorkWide) {
-        require_once(NINJACOUNTDOWN_DIR . 'app/Database/Activator.php');
-        $activator = new \NinjaCountdown\Database\Activator();
-        $activator->migrateDatabases($netWorkWide);
     });
 
 } else {

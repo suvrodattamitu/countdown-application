@@ -1,5 +1,5 @@
 <template>    
-    <div class="ninja-countdown-timer ninja-countdown-timer-1">
+    <div class="ninja-countdown-timer-wrapper ninja-countdown-timer-1">
         <div class="ninja-countdown-timer-container">
             <div class="ninja-countdown-timer">
                 <div class="ninja-countdown-timer-header">
@@ -45,7 +45,6 @@
                     </a>
                 </div>
             </div>
-
             <div class="ninja-countdown-timer-bar-close"></div>
         </div>
   </div>

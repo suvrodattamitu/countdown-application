@@ -39,6 +39,12 @@ class FrontendApp
 
             //dont load assets if the time is ended
             if( $distance> 0 ) {
+                wp_enqueue_style('ninjacountdown', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
+                $css = self::generateCSS( $configs );
+                add_action( 'wp_head', function () use ( $css ) {
+                    echo $css;
+                } );
+
                 wp_enqueue_script(
                     'countdown_manager',
                     NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js',
@@ -46,12 +52,6 @@ class FrontendApp
                     NINJACOUNTDOWN_VERSION,
                     true
                 );
-
-                $css = self::generateCSS( $configs );
-
-                add_action( 'wp_head', function () use ( $css ) {
-                    echo $css;
-                } );
                 
                 return static::getCountdownTimerHTML($configs);
             }
@@ -67,29 +67,27 @@ class FrontendApp
     public static function generateCSS($configs)
     {
         $prefix = '.ninja-countdown-timer-1';
-        ob_start();
 		?>
 
         <style type="text/css">
        
             <?php echo $prefix; ?> {
-                background-color: <?php echo $configs['styles']['background_color']; ?>;
+                background-color: <?php echo $configs['styles']['background_color'].'!important'; ?>;
                 <?php echo $configs['styles']['position']; ?>:0px;
             }
             <?php echo $prefix; ?> .ninja-countdown-timer-header-title-text{
-                color: <?php echo $configs['styles']['message_color']?>;
+                color: <?php echo $configs['styles']['message_color'].'!important';?>;
             }
             <?php echo $prefix; ?> .ninja-countdown-timer-button{
-                background-color: <?php echo $configs['styles']['button_color']; ?>
-                color: <?php echo $configs['styles']['button_text_color']; ?>
+                background-color: <?php echo $configs['styles']['button_color'].'!important'; ?>;
+                color: <?php echo $configs['styles']['button_text_color'].'!important'; ?>;
             }
             <?php echo $prefix; ?> .ninja-countdown-timer-item{
-                color: <?php echo $configs['styles']['timer_color']; ?>
+                color: <?php echo $configs['styles']['timer_color'].'!important'; ?>;
             }
 
         </style>
 
 		<?php
-		return ob_get_clean();           
     }
 }

@@ -47,11 +47,11 @@ class Countdown
 
             'styles' => array(
                 'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'top',
-                'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '',
-                'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '',
-                'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '',
-                'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '',
-                'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '',
+                'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
+                'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#4cca23',
+                'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#4c1fab',
+                'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
+                'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
                 'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
             )
         );        
