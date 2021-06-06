@@ -1,52 +1,46 @@
-=== Lightweight Countdown Timer Plugin for Wordpress ===
-Contributors: (this should be a list of wordpress.org userid's)
-Tags: countdown, timer, Countdown Timer, Ecommerce, Marketing
-Requires at least: 5.0
-Tested up to: 5.7
-Stable tag: 4.3
-Requires PHP: 5.6
+=== Ninja Countdown Builder | Fastest Countdown Builder ===
+Contributors: lovelightplugins
+Tags: Countdown, Countdown Builder, Countdown Timer, Timer
+Requires at least: 3.4
+Tested up to: 5.7.1
+Stable tag: 1.0.0
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-The easiest and fastest Countdown Timer Plugin for WordPress
+Display clean, customizable, and responsive Countdown To Your Wordpress Site.
 
 == Description ==
 
-=The easiest and fastest Countdown Timer Plugin for WordPress=
+The best way of customizable Countdown timer. You can set the Countdown timer the way you imagine. 
 
-**🎉 Customization Options**
+= Why Ninja Countdown ? =
 
-* You can show whatever you want to say your customers.
-* You can change background color, place bottom/top.
-* You can set any time you want.
-* You can put your sell links to the shop button.
-
-= 🚀 Modern. Powerful. Super Fast 🚀 =
-
-* Build with latest technology
-* Lightweight as it does not load unnecessary assets.
-* It does not effects your page loading.(Total assets is less than 10kb)
+* Fastest Ninja Countdown Builder is the Fastest Countdown builder.
+* Simplest **simple to set up**
+* Lightweight No un-used assets loads. Assets size is just 10kb.
+* Organized the plugin is well Organized to set up a new timer.
+* Live Preview You can edit and show live preview 
 
 == Frequently Asked Questions ==
 
-= Is this countdown timer is customzable? =
+= Is The Countdown customizable? =
+Yes, You can customize everything of the Countdown timer.
 
-Yes you can customize everything you want to customize.
-
-= Does it effects page loading? =
-
-Our plugin is not resource hungry. we make it Lightweight. Just necessary assets will be used(less than 10kb);
+= Has it built in Countdowns? =
+Yes, it has three built in Countdowns.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is stored in the /assets directory.
-2. This is the second screen shot
+1. Black Friday Layout
+2. New Year Layout
+3. Special Offer Layout
 
 == Changelog ==
 
-= 1.0.0 (Date: September 29, 2020) =
-* Initial Launch
-* 1482 git commits so far
-* 1982 cup of coffee (Just kidding, We lost count)
-* Work of 1 year + 5 developers
-* Let's make WordPress great!
+= 1.0.0 (Date: June 07, 2021) =
+* Added 3 built in layouts
+* Cached feeds for faster load
+* Add short code rendering
+
+= 1.0.0 (Date: May 15, 2021) =
+* Launched the Ninja Countdown Timer!

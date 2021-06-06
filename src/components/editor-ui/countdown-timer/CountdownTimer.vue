@@ -1,57 +1,61 @@
 <template>    
-    <div class="ninja-countdown-timer-wrapper" :class="['timer-position-'+all_configs.styles.position,all_configs.styles.position !== 'required_position' ? '': 'centered-counter-timer']">
-        <div class="ninja-countdown-timer-container">
-            <div class="ninja-countdown-timer-contents">
-                <div class="ninja-countdown-timer">
-                    <div class="ninja-countdown-timer-header">
-                        <div class="ninja-countdown-timer-header-title-text">
-                            {{ all_configs.timer.message }}
-                        </div>
-                    </div>
+    <div class="nfd-container">
+        <div class="nfd-row">
+            <div class="ninja-countdown-timer-wrapper ninja-wrapper-styler" :class="['timer-position-'+all_configs.styles.position]">
+                <div class="ninja-countdown-timer-container">
+                    <div class="ninja-countdown-timer-contents">
+                        <div class="ninja-countdown-timer">
+                            <div class="ninja-countdown-timer-header">
+                                <div class="ninja-countdown-timer-header-title-text">
+                                    {{ all_configs.timer.message }}
+                                </div>
+                            </div>
 
-                    <div class="ninja-countdown-timer-item-container">
-                        <div class="ninja-countdown-timer-item">
-                            <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
-                                <div class="ninja-countdown-item-contents">
-                                    <div class="ninja-countdown-timer-item-group-inner">
-                                        <div class="ninja-countdown-timer-item">{{days}}</div>
+                            <div class="ninja-countdown-timer-item-container">
+                                <div class="ninja-countdown-timer-item">
+                                    <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
+                                        <div class="ninja-countdown-item-contents">
+                                            <div class="ninja-countdown-timer-item-group-inner">
+                                                <div class="ninja-countdown-timer-item">{{days}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="ninja-countdown-timer-item-group-label" title="Days">Days</div>
+                                    </div>
+                                    <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
+                                        <div class="ninja-countdown-timer-item-group-inner">
+                                            <div class="ninja-countdown-timer-item">{{hours}}</div>
+                                        </div>
+                                        <div class="ninja-countdown-timer-item-group-label" title="Days">Hours</div>
+                                    </div>
+
+                                    <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
+                                        <div class="ninja-countdown-timer-item-group-inner">
+                                            <div class="ninja-countdown-timer-item">{{minutes}}</div>
+                                        </div>
+                                        <div class="ninja-countdown-timer-item-group-label" title="Days">Minutes</div>
+                                    </div>
+
+                                    <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
+                                        <div class="ninja-countdown-timer-item-group-inner">
+                                            <div class="ninja-countdown-timer-item">{{seconds}}</div>
+                                        </div>
+                                        <div class="ninja-countdown-timer-item-group-label" title="Days">Seconds</div>
                                     </div>
                                 </div>
-                                <div class="ninja-countdown-timer-item-group-label" title="Days">Days</div>
-                            </div>
-                            <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
-                                <div class="ninja-countdown-timer-item-group-inner">
-                                    <div class="ninja-countdown-timer-item">{{hours}}</div>
-                                </div>
-                                <div class="ninja-countdown-timer-item-group-label" title="Days">Hours</div>
                             </div>
 
-                            <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
-                                <div class="ninja-countdown-timer-item-group-inner">
-                                    <div class="ninja-countdown-timer-item">{{minutes}}</div>
-                                </div>
-                                <div class="ninja-countdown-timer-item-group-label" title="Days">Minutes</div>
-                            </div>
-
-                            <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
-                                <div class="ninja-countdown-timer-item-group-inner">
-                                    <div class="ninja-countdown-timer-item">{{seconds}}</div>
-                                </div>
-                                <div class="ninja-countdown-timer-item-group-label" title="Days">Seconds</div>
+                            <div class="ninja-countdown-timer-button-container" v-if="all_configs.button.show_button === 'true'">
+                                <a class="ninja-countdown-timer-button" :href="all_configs.button.button_link" :target="all_configs.button.new_tab ==='true' ? '_blank':'' ">
+                                    {{ all_configs.button.button_text }}
+                                </a>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="ninja-countdown-timer-button-container" v-if="all_configs.button.show_button === 'true'">
-                        <a class="ninja-countdown-timer-button" :href="all_configs.button.button_link" :target="all_configs.button.new_tab ==='true' ? '_blank':'' ">
-                            {{ all_configs.button.button_text }}
-                        </a>
+                        <div class="ninja-countdown-timer-bar-close" v-if="all_configs.styles.position !== 'required_position'"></div>
                     </div>
                 </div>
-                <div class="ninja-countdown-timer-bar-close" v-if="all_configs.styles.position !== 'required_position'"></div>
             </div>
         </div>
-  </div>
+    </div>
 </template>
 
 <script>

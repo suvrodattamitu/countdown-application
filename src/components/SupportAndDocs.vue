@@ -25,9 +25,8 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
 export default {
-    
     data() {
         return {
             assets_url: window.NinjaCountdownAdmin.assets_url,
@@ -56,6 +55,5 @@ export default {
             }
         }
     }
-
 }
 </script>

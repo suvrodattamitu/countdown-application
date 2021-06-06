@@ -6,7 +6,7 @@
  * Author: Light Plugins
  * Author URI: 
  * License: GPLv2 or later
- * Version: 1.3.1
+ * Version: 1.0.1
  * Text Domain: ninjacountdown
  */
 
@@ -53,13 +53,16 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
             $menu->register();
 
             // Top Level Ajax Handlers for reviews
-            $ajaxHandler = new \NinjaCountdown\Route\AdminAjaxHandler();
+            $ajaxHandler = new \NinjaCountdown\Route\CountdownHandler();
             $ajaxHandler->registerEndpoints();
 
             add_action('ninjacountdown/render_admin_app', function () {
                 $adminApp = new \NinjaCountdown\Views\AdminApp();
                 $adminApp->bootView();
             });
+
+            //delete cache when data is updated
+            add_action('ninja_countdown_meta_updated', array('\NinjaCountdown\Route\CountdownHandler', 'deleteCache'));
 
             //remove all admin notice
             add_action('admin_init', function () {
@@ -74,14 +77,24 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
 
         public function publicHooks()
         {
-            add_action('wp_footer', array((new \NinjaCountdown\Views\FrontendApp()), 'render'));
+            add_shortcode('ninja_countdown_layout', function ($args) {
+                $args = shortcode_atts(array(
+                    'id' => '',
+                ), $args);
+
+                if (!$args['id']) {
+                    return;
+                }
+
+                $builder = new \NinjaCountdown\Views\FrontendApp();
+                return $builder->renderCountdown($args['id']);
+            });
         }
     }
 
     add_action('plugins_loaded', function () {
         (new NinjaCountdown())->boot();
     });
-
 } else {
     add_action('admin_init', function () {
         deactivate_plugins(plugin_basename(__FILE__));

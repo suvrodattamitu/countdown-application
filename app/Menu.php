@@ -49,11 +49,6 @@ class Menu
             'manage_options',
             'admin.php?page=ninjacountdown#/',
         );
-        $submenu['ninjacountdown']['settings'] = array(
-            __('Settings', 'ninjacountdown'),
-            'manage_options',
-            'admin.php?page=ninjacountdown#/settings',
-        );
         $submenu['ninjacountdown']['support'] = array(
             __('Support', 'ninjacountdown'),
             'manage_options',
@@ -102,7 +97,6 @@ class Menu
     public function enqueueAssets()
     {
         if (isset($_GET['page']) && $_GET['page'] == 'ninjacountdown') {
-
             wp_enqueue_style('ninjacountdown_admin_app', NINJACOUNTDOWN_URL . 'public/css/ninjacountdown-admin.css', array(), NINJACOUNTDOWN_VERSION);
             wp_enqueue_style('ninjacountdown_app', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
 
@@ -114,13 +108,8 @@ class Menu
             wp_enqueue_script('ninjacountdown_admin_app', NINJACOUNTDOWN_URL . 'public/js/ninjacountdown-admin.js', array('ninjacountdown_boot'), NINJACOUNTDOWN_VERSION, true);
 
             $ninjacountdownAdminVars = apply_filters('ninjacountdown/admin_app_vars', array(
-
-                'i18n' => array(
-                    'All Collections' => __('All Collections', 'ninjacountdown')
-                ),
                 'assets_url' => NINJACOUNTDOWN_URL . 'public',
-                'ajaxurl' => admin_url('admin-ajax.php'),
-
+                'ajaxurl' => admin_url('admin-ajax.php')
             ));
 
             wp_localize_script('ninjacountdown_boot', 'NinjaCountdownAdmin', $ninjacountdownAdminVars);

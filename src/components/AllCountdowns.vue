@@ -150,121 +150,120 @@
 </style>
 
 <script type="text/babel">
-    import predefinedCountdowns from '../components/modals/predefinedCountdowns.vue';
-    import Welcome from './editor-ui/pieces/Welcome.vue';
+import predefinedCountdowns from '../components/modals/predefinedCountdowns.vue';
+import Welcome from './editor-ui/pieces/Welcome.vue';
 
-    export default {
-        components:{
-            predefinedCountdowns,
-            Welcome
-        },
-        data() {
-            return {
-                showAddFormModal: false,
-                loading: false,
-                allCountdowns: [],
-                multipleSelection: [],
-                deletingCountdown: {},
-                deleteDialogVisible: false,
-                //pagination
-                per_page: 5,
-                page_number: 1,
-                total: 0,
-                pageSizes: [5,10, 20, 30, 40, 50],
-                search_string: '',
-            }
-        },
-        methods: {
-            //multiple select
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
-            },
+export default {
+    components:{
+        predefinedCountdowns,
+        Welcome
+    },
+    data() {
+        return {
+            showAddFormModal: false,
+            loading: false,
+            allCountdowns: [],
+            multipleSelection: [],
+            deletingCountdown: {},
+            deleteDialogVisible: false,
             //pagination
-            handleSizeChange(val) {
-                this.per_page = val;
-                this.getallCountdowns();
-            },
-            handleCurrentChange(val) {
-                this.page_number = val;
-                this.getallCountdowns();
-            },
-            getallCountdowns(){
-                this.loading = true
-                this.$adminGet({
-                    route: 'get_all_countdowns',
-                    per_page: this.per_page,
-                    page_number: this.page_number,
-                    search_string: this.search_string
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.allCountdowns = response.data.allCountdowns
-                            //pagination
-                            this.total = response.data.total
-                        }
-                    }).fail(error => {
-
-                    }).always(() => {
-                        this.loading = false
-                    });
-            },
-            confirmDeleteCountdown(countdown) {
-                this.deletingCountdown = countdown;
-                this.deleteDialogVisible = true;
-            },
-            deleteCountdownNow(){
-                this.loading = true;
-                this.$adminPost({
-                    route: 'delete_countdown',
-                    countdown_id: this.deletingCountdown.ID
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.$message({
-                                showClose: true,
-                                message: response.data.message,
-                                type: 'success'
-                            });
-                            this.getallCountdowns();
-                        }
-                    }).fail(error => {
-
-                    }).always(() => {
-                        this.deleteDialogVisible = false;
-                        this.deletingCountdown = {}
-                        this.loading = false;
-                    });
-            },
-            handleDeleteClose(){
-                this.deleteDialogVisible = false;
-                this.deletingCountdown = {}
-            },
-            duplicateCountdown(countdown){
-                
-                this.loading = true;
-                this.$adminPost({
-                    route: 'duplicate_countdown',
-                    countdown_id: countdown.ID
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.$message({
-                                showClose: true,
-                                message: response.data.message,
-                                type: 'success'
-                            });
-                            let countdownId = response.data.countdown_id
-                            this.$router.push('/countdown-editor/'+countdownId)
-                        }
-                    }).fail((error) => {
-
-                    }).always(() => {
-                        this.loading = false;
-                    });
-            }
-        },
-        mounted(){
-            this.getallCountdowns()
+            per_page: 5,
+            page_number: 1,
+            total: 0,
+            pageSizes: [5,10, 20, 30, 40, 50],
+            search_string: '',
         }
+    },
+    methods: {
+        //multiple select
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
+        },
+        //pagination
+        handleSizeChange(val) {
+            this.per_page = val;
+            this.getallCountdowns();
+        },
+        handleCurrentChange(val) {
+            this.page_number = val;
+            this.getallCountdowns();
+        },
+        getallCountdowns(){
+            this.loading = true
+            this.$adminGet({
+                route: 'get_all_countdowns',
+                per_page: this.per_page,
+                page_number: this.page_number,
+                search_string: this.search_string
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.allCountdowns = response.data.allCountdowns
+                        //pagination
+                        this.total = response.data.total
+                    }
+                }).fail(error => {
+
+                }).always(() => {
+                    this.loading = false
+                });
+        },
+        confirmDeleteCountdown(countdown) {
+            this.deletingCountdown = countdown;
+            this.deleteDialogVisible = true;
+        },
+        deleteCountdownNow(){
+            this.loading = true;
+            this.$adminPost({
+                route: 'delete_countdown',
+                countdown_id: this.deletingCountdown.ID
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.$message({
+                            showClose: true,
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                        this.getallCountdowns();
+                    }
+                }).fail(error => {
+
+                }).always(() => {
+                    this.deleteDialogVisible = false;
+                    this.deletingCountdown = {}
+                    this.loading = false;
+                });
+        },
+        handleDeleteClose(){
+            this.deleteDialogVisible = false;
+            this.deletingCountdown = {}
+        },
+        duplicateCountdown(countdown){
+            this.loading = true;
+            this.$adminPost({
+                route: 'duplicate_countdown',
+                countdown_id: countdown.ID
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.$message({
+                            showClose: true,
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                        let countdownId = response.data.countdown_id
+                        this.$router.push('/countdown-editor/'+countdownId)
+                    }
+                }).fail((error) => {
+
+                }).always(() => {
+                    this.loading = false;
+                });
+        }
+    },
+    mounted(){
+        this.getallCountdowns()
     }
+}
 </script>

@@ -29,21 +29,12 @@
             </div>
 
             <div class="ninja_countdown_editor_body" v-loading="loading">
-                <div class="ninja_countdown_preview">
+                <div class="ninja_countdown_preview" :class="[countdown_meta.styles.position !== 'required_position' ? '': 'centered-counter-timer']">
                     <countdown :all_configs="countdown_meta"></countdown>
                 </div>
                 <div class="ninja_countdown_settings" v-if="countdown_meta">
-                    <!-- <div class="header">
-                        <remove @on-confirm="clearConfigs"></remove>
-                        <el-button type="primary" size="mini" @click="updateConfigs">
-                            Update
-                        </el-button>
-                    </div> -->
-
                     <div class="settings_panel">
-
                         <el-tabs type="border-card">
-
                             <el-tab-pane>
                                 <template #label>
                                     <span class="icon-style"><i class="el-icon-date"></i> Timer</span>
@@ -64,9 +55,7 @@
                                 </template>
                                 <style-panel :styles_configs="countdown_meta.styles"></style-panel>
                             </el-tab-pane>
-
                         </el-tabs>
-
                     </div>
                 </div>
             </div>
@@ -74,8 +63,7 @@
     </div>
 </template>
 
-<script>
-
+<script type="text/babel">
 import Countdown from '../components/editor-ui/countdown-timer/CountdownTimer'
 import StylePanel from '../components/editor-ui/settings-elements/StylePanel'
 import ButtonPanel from '../components/editor-ui/settings-elements/ButtonPanel'
@@ -138,7 +126,7 @@ export default {
                     if( response.data ) {
                         this.countdown_meta = response.data.countdown_meta;
                         this.countdown_details = response.data.countdown_details;
-                        //window.mitt.emit('update_css');
+                        window.mitt.emit('update_css');
                     }
                 }).fail(error => {
                     
@@ -183,7 +171,7 @@ export default {
             let countdown_meta = this.countdown_meta;
             return `
                 /* Header Color Styling */
-                    ${prefix} {
+                    ${prefix} .ninja-countdown-timer-container{
                     background-color: ${countdown_meta.styles.background_color};
                 }
                 ${prefix} .ninja-countdown-timer-header-title-text{
@@ -200,8 +188,8 @@ export default {
         },
 
         reloadCss() {
-            // let countdownCss = this.generateCSS('.ninja-countdown-timer-1');
-            // jQuery('#ninja_countdown_dynamic_style').html(countdownCss);  
+            let countdownCss = this.generateCSS('.ninja-wrapper-styler');
+            jQuery('#ninja_countdown_dynamic_style').html(countdownCss);  
         }
         //css generate end
     },
@@ -217,12 +205,11 @@ export default {
 
     mounted() {
         this.getConfigs();
-        // window.mitt.on('update_css', () => {
-        //     if (this.countdown_meta) {
-        //         this.reloadCss();
-        //     }
-        // });
+        window.mitt.on('update_css', () => {
+            if (this.countdown_meta) {
+                this.reloadCss();
+            }
+        });
     }
 }
-
 </script>

@@ -20,15 +20,15 @@ msgstr ""
 msgid "All Collections"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:86
+#: app/Route/CountdownHandler.php:86
 msgid "All Pages"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:77
+#: app/Route/CountdownHandler.php:77
 msgid "Congrats, successfully cleared!"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:68 app/Route/AdminAjaxHandler.php:104
+#: app/Route/CountdownHandler.php:68 app/Route/CountdownHandler.php:104
 msgid "Congrats, successfully saved!"
 msgstr ""
 
@@ -59,6 +59,6 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:89
+#: app/Route/CountdownHandler.php:89
 msgid "Untitled"
 msgstr ""

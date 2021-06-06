@@ -2,7 +2,6 @@ import { createWebHashHistory, createRouter } from "vue-router";
 
 import GlobalView from '../Global';
 import CountdownEditor from '../components/CountdownEditor';
-import Settings from '../components/Settings';
 import SupportAndDocs from '../components/SupportAndDocs';
 import AllCountdowns from '../components/AllCountdowns';
 
@@ -17,12 +16,6 @@ const routes = [
                 name: 'all-countdowns',
                 component: AllCountdowns,
                 meta: { title: 'All Countdowns' }
-            },
-            {
-                path: '/settings',
-                name: 'settings',
-                component: Settings,
-                meta: { title: 'Settings' }
             },
             {
                 path: '/support',

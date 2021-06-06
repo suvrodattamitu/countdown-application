@@ -1,7 +1,7 @@
 <template>
     <div class="predefinedModal">
         <el-dialog
-            title="Design a new popup"
+            title="Design a new Countdown"
             v-model="visibility"
             :before-close="close"
             top="40px"
@@ -29,81 +29,80 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: 'predefinedFormsModal',
-        props: {
-            visibility: Boolean
+<script type="text/babel">
+export default {
+    name: 'predefinedFormsModal',
+    props: {
+        visibility: Boolean
+    },
+    emits: ['update:visibility'],
+    data() {
+        return {
+            creatingTemplate: false,
+            predefinedTemplates: [],
+            isNewForm: false,
+            selectedPredefinedForm: '',
+            form_title: '',
+            fetching: false
+        }
+    },
+    methods: {
+        close() {
+            this.$emit('update:visibility', false);
+            this.isNewForm = false;
         },
-        emits: ['update:visibility'],
-        data() {
-            return {
-                creatingTemplate: false,
-                predefinedTemplates: [],
-                isNewForm: false,
-                selectedPredefinedForm: '',
-                form_title: '',
-                fetching: false
-            }
-        },
-        methods: {
-            close() {
-                this.$emit('update:visibility', false);
-                this.isNewForm = false;
-            },
-            fetchPredefinedTemplates() {
-                this.fetching = true
-                this.$adminGet({
-                    route: 'get_predefined_template'
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.predefinedTemplates = response.data.templates
-                        }
-                    }).fail(error => {
+        fetchPredefinedTemplates() {
+            this.fetching = true
+            this.$adminGet({
+                route: 'get_predefined_template'
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.predefinedTemplates = response.data.templates
+                    }
+                }).fail(error => {
 
-                    }).always(() => {
-                        this.fetching = false
-                    });
-            },
-            createPopupMeta(templateType, form) {
-                this.creatingTemplate = true
-                this.$adminPost({
-                    route: 'create_countdown_meta',
-                    type: templateType
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.$message({
-                                showClose: true,
-                                message: response.data.message,
-                                type: 'success'
-                            });
-                            let templateId = response.data.template_id;
-                            this.$router.push('/countdown-editor/'+templateId);
-                        }
-                    }).fail(error => {
+                }).always(() => {
+                    this.fetching = false
+                });
+        },
+        createPopupMeta(templateType, form) {
+            this.creatingTemplate = true
+            this.$adminPost({
+                route: 'create_countdown_meta',
+                type: templateType
+            })
+                .then(response => {
+                    if( response.data ) {
                         this.$message({
                             showClose: true,
-                            message: 'Failed to create new template',
-                            type: 'error'
+                            message: response.data.message,
+                            type: 'success'
                         });
-                    }).always(() => {
-                        this.creatingTemplate = false
+                        let templateId = response.data.template_id;
+                        this.$router.push('/countdown-editor/'+templateId);
+                    }
+                }).fail(error => {
+                    this.$message({
+                        showClose: true,
+                        message: 'Failed to create new template',
+                        type: 'error'
                     });
-            },
-            gotoPage(url) {
-                location.href = url;
-            }
+                }).always(() => {
+                    this.creatingTemplate = false
+                });
         },
-        mounted() {
-            this.fetchPredefinedTemplates();
+        gotoPage(url) {
+            location.href = url;
         }
+    },
+    mounted() {
+        this.fetchPredefinedTemplates();
     }
+}
 </script>
 
 <style lang="scss">
-
     .predefinedModal {
         .el-dialog__title {
             display: flex;

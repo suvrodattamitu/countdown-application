@@ -37,11 +37,16 @@
         width:100%;
         .ninja_countdown_preview {
             width: 69%;
-            margin-top: 10px;
+            margin: 10px;
             min-height: 450px;
             float: left;
             background: #fff;
             position: relative;
+            &.centered-counter-timer{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
         .ninja_countdown_settings {
             width: 29%;

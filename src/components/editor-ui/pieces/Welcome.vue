@@ -1,8 +1,8 @@
 <template>
 <div class="show_fizzy_popup_modal_container">
     <div class="fizzy-popup-modal-items">
-        <h4>Welcome to Fizzy Popups. Cutest popup plugin for wordpress</h4>
-        <el-button type="success" @click="$emit('update:modelValue', true)">Add New Pupup</el-button>
+        <h4>Welcome to Ninja Countdown. Cutest countdown plugin for wordpress</h4>
+        <el-button type="success" @click="$emit('update:modelValue', true)">Add New Countdown</el-button>
     </div>
 </div>
 </template>
