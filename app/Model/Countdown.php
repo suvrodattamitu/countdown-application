@@ -12,8 +12,9 @@ if (!defined('ABSPATH')) {
  */
 class Countdown
 {
-    public function formatConfigs($configs = array())
+    public function predefinedCountdowns()
     {
+        $asset_url = NINJACOUNTDOWN_URL . 'public';
         $dateTime = current_datetime();
 
         //end date
@@ -29,31 +30,103 @@ class Countdown
         $endTime = time() + $periods[$unit];
 
         return array(
-            'timer' => array(
-                'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
-                'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
-                'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
-                'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
-                'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
-                'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+            'template_one'  => array(
+                'title' => 'Christmas Sale',
+                'image'      => $asset_url.'/images/countdowns/layout-one.png',
+                'layout_type' => 'Christmas Sale',
+                
+                'settings'  => array(
+                    'timer' => array(
+                        'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
+                        'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
+                        'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
+                        'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
+                        'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
+                        'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+                    ),
+                    'button'    => array(
+                        'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
+                        'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
+                        'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop Now',
+                        'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+                    ),
+                    'styles' => array(
+                        'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'top',
+                        'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
+                        'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#4cca23',
+                        'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#4c1fab',
+                        'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
+                        'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
+                        'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+                    )
+                )
             ),
 
-            'button'    => array(
-                'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
-                'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
-                'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop Now',
-                'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+            'template_two'  => array(
+                'title' => 'Christmas Sale',
+                'image'      => $asset_url.'/images/countdowns/layout-two.png',
+                'layout_type' => 'Christmas Sale',
+                
+                'settings'  => array(
+                    'timer' => array(
+                        'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
+                        'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
+                        'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
+                        'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
+                        'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
+                        'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+                    ),
+                    'button'    => array(
+                        'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
+                        'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
+                        'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop Now',
+                        'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+                    ),
+                    'styles' => array(
+                        'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'top',
+                        'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
+                        'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#4cca23',
+                        'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#4c1fab',
+                        'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
+                        'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
+                        'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+                    )
+                )
             ),
 
-            'styles' => array(
-                'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'top',
-                'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
-                'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#4cca23',
-                'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#4c1fab',
-                'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
-                'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
-                'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+            'template_three'  => array(
+                'title' => 'Christmas Sale',
+                'image'      => $asset_url.'/images/countdowns/layout-three.png',
+                'layout_type' => 'Christmas Sale',
+                
+                'settings'  => array(
+                    'timer' => array(
+                        'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
+                        'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
+                        'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
+                        'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
+                        'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
+                        'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+                    ),
+                    'button'    => array(
+                        'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
+                        'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
+                        'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop Now',
+                        'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+                    ),
+                    'styles' => array(
+                        'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'top',
+                        'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
+                        'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#4cca23',
+                        'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#4c1fab',
+                        'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
+                        'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
+                        'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+                    )
+                )
             )
-        );        
+
+        );    
+              
     }
 }

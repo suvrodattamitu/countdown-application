@@ -9,6 +9,7 @@ import {
   ElCheckboxGroup,
   ElCol,
   ElColorPicker,
+  ElDialog,
   ElForm,
   ElFormItem,
   ElIcon,
@@ -17,6 +18,7 @@ import {
   ElInputNumber,
   ElOption,
   ElOptionGroup,
+  ElPagination,
   ElPopover,
   ElRadio,
   ElRadioButton,
@@ -26,6 +28,8 @@ import {
   ElSwitch,
   ElTabPane,
   ElTabs,
+  ElTable,
+  ElTableColumn,
   ElTooltip,
   ElLoading,
   ElMessage
@@ -39,6 +43,7 @@ const components = [
   ElCheckboxGroup,
   ElCol,
   ElColorPicker,
+  ElDialog,
   ElForm,
   ElFormItem,
   ElIcon,
@@ -47,6 +52,7 @@ const components = [
   ElInputNumber,
   ElOption,
   ElOptionGroup,
+  ElPagination,
   ElPopover,
   ElRadio,
   ElRadioButton,
@@ -56,6 +62,8 @@ const components = [
   ElSwitch,
   ElTabPane,
   ElTabs,
+  ElTable,
+  ElTableColumn,
   ElTooltip
 ]
 

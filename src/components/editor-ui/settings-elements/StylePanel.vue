@@ -7,6 +7,7 @@
                     <el-radio-group v-model="styles_configs.position">
                         <el-radio :label="'top'">Top</el-radio>
                         <el-radio :label="'bottom'">Bottom</el-radio>
+                        <el-radio :label="'required_position'">Required Position</el-radio>
                     </el-radio-group>
                 </div>
             </el-col>

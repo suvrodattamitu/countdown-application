@@ -1,44 +1,73 @@
 <template>
     <div class="ninja_countdown_wrapper" v-loading="loading">
-        <div class="ninja_countdown_editor" v-if="configs">
-            <div class="ninja_countdown_preview">
-                <countdown :all_configs="configs"></countdown>
-            </div>
-            <div class="ninja_countdown_settings" v-if="configs">
-                <div class="header">
-                    <remove @on-confirm="clearConfigs"></remove>
-                    <el-button type="primary" size="mini" @click="updateConfigs">
+        <div class="ninja_countdown_editor" v-if="countdown_meta">
+            <div class="wpp_section_header">
+                <div class="wpp_section_title">
+                    <div class="ninja_countdown_editor_header_show" v-if="!title_editing">
+                        <i style="cursor: pointer" @click="title_editing = true" class="el-icon-edit">{{countdown_details.post_title}}</i>
+                    </div>
+                    <div v-else class="ninja_countdown_editor_header_editing">
+                        <el-input placeholder="Table Name" size="mini" v-model="countdown_details.post_title"></el-input>
+                        <el-button type="success" size="mini" @click="updateCountdownTitle">Save</el-button>
+                    </div>
+                </div>
+
+                <div class="wpp_section_logo">
+                    <div class="wpp_upgrade_logo">
+                        <code class="copy"
+                            :data-clipboard-text='`[ninja_countdown_layout id="${countdown_details.ID}"]`'>
+                            <i class="el-icon-document"></i> [ninja_countdown_layout id="{{ countdown_details.ID }}"]
+                        </code>
+                    </div>
+                </div>
+                
+                <div class="wpp_section_actions">
+                    <el-button size="mini" type="primary" @click="updateConfigs">
                         Update
                     </el-button>
                 </div>
+            </div>
 
-                <div class="settings_panel">
+            <div class="ninja_countdown_editor_body" v-loading="loading">
+                <div class="ninja_countdown_preview">
+                    <countdown :all_configs="countdown_meta"></countdown>
+                </div>
+                <div class="ninja_countdown_settings" v-if="countdown_meta">
+                    <!-- <div class="header">
+                        <remove @on-confirm="clearConfigs"></remove>
+                        <el-button type="primary" size="mini" @click="updateConfigs">
+                            Update
+                        </el-button>
+                    </div> -->
 
-                    <el-tabs type="border-card">
+                    <div class="settings_panel">
 
-                        <el-tab-pane>
-                            <template #label>
-                                <span class="icon-style"><i class="el-icon-date"></i> Timer</span>
-                            </template>
-                            <timer-panel :timer_configs="configs.timer"></timer-panel>
-                        </el-tab-pane>
+                        <el-tabs type="border-card">
 
-                        <el-tab-pane>
-                            <template #label>
-                                <span class="icon-style"><i class="el-icon-video-play"></i>Button</span>
-                            </template>
-                            <button-panel :button_configs="configs.button"></button-panel>
-                        </el-tab-pane>
+                            <el-tab-pane>
+                                <template #label>
+                                    <span class="icon-style"><i class="el-icon-date"></i> Timer</span>
+                                </template>
+                                <timer-panel :timer_configs="countdown_meta.timer"></timer-panel>
+                            </el-tab-pane>
 
-                        <el-tab-pane >
-                            <template #label>
-                                <span class="icon-style"><i class="el-icon-edit"></i>Style</span>
-                            </template>
-                            <style-panel :styles_configs="configs.styles"></style-panel>
-                        </el-tab-pane>
+                            <el-tab-pane>
+                                <template #label>
+                                    <span class="icon-style"><i class="el-icon-video-play"></i>Button</span>
+                                </template>
+                                <button-panel :button_configs="countdown_meta.button"></button-panel>
+                            </el-tab-pane>
 
-                    </el-tabs>
+                            <el-tab-pane >
+                                <template #label>
+                                    <span class="icon-style"><i class="el-icon-edit"></i>Style</span>
+                                </template>
+                                <style-panel :styles_configs="countdown_meta.styles"></style-panel>
+                            </el-tab-pane>
 
+                        </el-tabs>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,38 +96,21 @@ export default {
             val:'',
             val1:'',
             activeName: "1",
-            configs: false,
-            loading: false
+            title_editing: false,
+            countdown_details:false,
+            countdown_meta: false,
+            loading: false,
+            countdown_id: this.$route.params.countdown_id
         }
     },
 
     methods: {
-        clearConfigs() {
-            this.loading = true
-            this.$adminPost({
-                route: 'clear_configs',
-            })
-                .then(response => {
-                    if( response.data ) {
-                        this.$message({
-                            showClose: true,
-                            message: response.data.message,
-                            type: 'success'
-                        });
-                        this.getConfigs();
-                    }
-                })
-                .fail(error => {
-                })
-                .always(() => {
-                    this.loading = false
-                });
-        },
         updateConfigs() {
             this.loading = true
             this.$adminPost({
-                route: 'save_configs',
-                configs: JSON.stringify(this.configs)
+                route: 'update_countdown_meta',
+                countdown_id: this.countdown_id,
+                countdown_meta: JSON.stringify(this.countdown_meta)
             })
                 .then(response => {
                     if( response.data ) {
@@ -109,61 +121,93 @@ export default {
                         });
                         this.getConfigs();
                     }
-                })
-                .fail(error => {
-                })
-                .always(() => {
+                }).fail(error => {
+
+                }).always(() => {
                     this.loading = false
                 });
         },
+
         getConfigs() {
             this.loading = true
             this.$adminGet({
-                route: 'get_configs'
+                route: 'get_countdown_meta',
+                countdown_id: this.$route.params.countdown_id
             })
                 .then(response => {
                     if( response.data ) {
-                        this.configs = response.data.configs
+                        this.countdown_meta = response.data.countdown_meta;
+                        this.countdown_details = response.data.countdown_details;
+                        //window.mitt.emit('update_css');
                     }
-                })
-                .fail(error => {
-                })
-                .always(() => {
+                }).fail(error => {
+                    
+                }).always(() => {
+                    this.loading = false
+                });
+        },
+        
+        updateCountdownTitle(){
+            if (this.countdown_details && !this.countdown_details.post_title) {
+                this.$message({
+                    showClose: true,
+                    message: 'Please Provide Countdown Title',
+                    type: 'error'
+                });
+                return;
+            }
+            this.loading = true
+            this.$adminPost({
+                route: 'update_countdown_title',
+                countdown_id: this.countdown_id,
+                countdown_title: this.countdown_details.post_title
+            })
+                .then(response => {
+                    if( response.data ) {
+                        this.$message({
+                            showClose: true,
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                        this.title_editing = false;
+                    }
+                }).fail(error => {
+
+                }).always(() => {
                     this.loading = false
                 });
         },
 
         //css generate start 
         generateCSS(prefix) {
-            let configs = this.configs;
+            let countdown_meta = this.countdown_meta;
             return `
                 /* Header Color Styling */
                     ${prefix} {
-                    background-color: ${configs.styles.background_color};
-                    ${configs.styles.position}:0;
+                    background-color: ${countdown_meta.styles.background_color};
                 }
                 ${prefix} .ninja-countdown-timer-header-title-text{
-                    color: ${configs.styles.message_color};
+                    color: ${countdown_meta.styles.message_color};
                 }
                 ${prefix} .ninja-countdown-timer-button{
-                    background-color: ${configs.styles.button_color};
-                    color: ${configs.styles.button_text_color}
+                    background-color: ${countdown_meta.styles.button_color};
+                    color: ${countdown_meta.styles.button_text_color}
                 }
                 ${prefix} .ninja-countdown-timer-item{
-                    color: ${configs.styles.timer_color}
+                    color: ${countdown_meta.styles.timer_color}
                 }
              `
         },
 
         reloadCss() {
-            let countdownCss = this.generateCSS('.ninja-countdown-timer-1');
-            jQuery('#ninja_countdown_dynamic_style').html(countdownCss);  
+            // let countdownCss = this.generateCSS('.ninja-countdown-timer-1');
+            // jQuery('#ninja_countdown_dynamic_style').html(countdownCss);  
         }
         //css generate end
     },
 
     watch:{
-        'configs': {
+        'countdown_meta': {
             handler() {
                 window.mitt.emit('update_css')
             },
@@ -173,11 +217,11 @@ export default {
 
     mounted() {
         this.getConfigs();
-        window.mitt.on('update_css', () => {
-            if (this.configs) {
-                this.reloadCss();
-            }
-        });
+        // window.mitt.on('update_css', () => {
+        //     if (this.countdown_meta) {
+        //         this.reloadCss();
+        //     }
+        // });
     }
 }
 

@@ -74,7 +74,7 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
 
         public function publicHooks()
         {
-            add_action('wp_footer', array('NinjaCountdown\Views\FrontendApp', 'render'));
+            add_action('wp_footer', array((new \NinjaCountdown\Views\FrontendApp()), 'render'));
         }
     }
 

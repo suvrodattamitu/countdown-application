@@ -44,8 +44,8 @@ class Menu
             $this->getIcon(),
             25
         );
-        $submenu['ninjacountdown']['countdown'] = array(
-            __('Design Countdown', 'ninjacountdown'),
+        $submenu['ninjacountdown']['all-countdowns'] = array(
+            __('All Countdowns', 'ninjacountdown'),
             'manage_options',
             'admin.php?page=ninjacountdown#/',
         );

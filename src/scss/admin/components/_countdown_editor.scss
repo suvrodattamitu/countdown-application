@@ -5,18 +5,49 @@
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-    .ninja_countdown_preview {
-        width: 70%;
-        margin-top: 10px;
-        min-height: 450px;
-        float: left;
-        background: #fff;
-        position: relative;
+    .wpp_section_header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #38393a;
+        padding: 10px 15px;
+
+        .wpp_section_title{
+            color: #fff;
+            font-size: 16px;
+            .ninja_countdown_editor_header_editing {
+                max-width: 400px;
+                .el-input {
+                    display: inline-block;
+                    width: 300px;
+                }
+                button {
+                    display: inline-block;
+                }
+            } 
+        }
+
+        .wpp_section_logo {
+            .wpp_upgrade_logo {
+              color: white;
+            }
+        }
     }
-    .ninja_countdown_settings {
-        width: 29%;
-        margin-top: 10px;
-        float: right;
+    .ninja_countdown_editor_body{
+        width:100%;
+        .ninja_countdown_preview {
+            width: 69%;
+            margin-top: 10px;
+            min-height: 450px;
+            float: left;
+            background: #fff;
+            position: relative;
+        }
+        .ninja_countdown_settings {
+            width: 29%;
+            margin-top: 10px;
+            float: right;
+        }
     }
 }
   
