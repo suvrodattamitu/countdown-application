@@ -18,8 +18,8 @@ class Countdown
         $dateTime = current_datetime();
 
         //end date
-        $period = isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1;
-        $unit   = isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days';
+        $period = 1;
+        $unit   = 'days';
 
         $periods = [
             'days'      => $period*60 * 60 * 24 ,
@@ -37,27 +37,26 @@ class Countdown
                 
                 'settings'  => array(
                     'timer' => array(
-                        'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
-                        'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
-                        'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Black Friday Sale! Get 50% off!!',
-                        'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
-                        'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
-                        'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+                        'time_period'   => 1,
+                        'time_unit'     => 'days',
+                        'message'       => 'Black Friday Sale! Get 50% off!!',
+                        'currentdatetime'   => time(),
+                        'enddatetime'       => $endTime*1000,
                     ),
                     'button'    => array(
-                        'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
-                        'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
-                        'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop Now',
-                        'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+                        'show_button'    => 'true',
+                        'button_link'    => '',
+                        'button_text'    => 'Shop Now',
+                        'new_tab'        => 'true'
                     ),
                     'styles' => array(
-                        'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'top',
-                        'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#ffec00',
-                        'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#ffec00',
-                        'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#000000',
-                        'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#ffec00',
-                        'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#000000',
-                        'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+                        'position'          => 'top',
+                        'timer_color'       => '#ffec00',
+                        'button_color'      => '#ffec00',
+                        'background_color'  => '#000000',
+                        'message_color'     => '#ffec00',
+                        'button_text_color' => '#000000',
+                        'animation'         => 'flip'
                     )
                 )
             ),
@@ -69,27 +68,26 @@ class Countdown
                 
                 'settings'  => array(
                     'timer' => array(
-                        'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
-                        'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
-                        'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'New Year is coming!! 🎉🎉',
-                        'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
-                        'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
-                        'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+                        'time_period'   => 1,
+                        'time_unit'     => 'days',
+                        'message'       => 'New Year is coming!! 🎉🎉',
+                        'currentdatetime'   => time(),
+                        'enddatetime'       => $endTime*1000,
                     ),
                     'button'    => array(
-                        'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
-                        'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
-                        'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop Now',
-                        'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+                        'show_button'    => 'true',
+                        'button_link'    => '',
+                        'button_text'    => 'Shop Now',
+                        'new_tab'        => 'true'
                     ),
                     'styles' => array(
-                        'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'required_position',
-                        'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
-                        'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#ed3247',
-                        'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#211e54',
-                        'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
-                        'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
-                        'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+                        'position'          => 'required_position',
+                        'timer_color'       => '#fff',
+                        'button_color'      => '#ed3247',
+                        'background_color'  => '#211e54',
+                        'message_color'     => '#fff',
+                        'button_text_color' => '#fff',
+                        'animation'         => 'flip'
                     )
                 )
             ),
@@ -101,27 +99,26 @@ class Countdown
                 
                 'settings'  => array(
                     'timer' => array(
-                        'time_period'   => isset($configs['timer']['time_period']) ? $configs['timer']['time_period'] : 1,
-                        'time_unit'     => isset($configs['timer']['time_unit']) ? $configs['timer']['time_unit'] : 'days',
-                        'message'       => isset($configs['timer']['message']) ? $configs['timer']['message'] : 'Get 50% off before it\'s too late ⏳',
-                        'currentdatetime'   => isset($configs['timer']['currentdatetime']) ? $configs['timer']['currentdatetime'] : time(),
-                        'enddatetime'       => isset($configs['timer']['enddatetime']) ? $configs['timer']['enddatetime'] : $endTime*1000,
-                        'saved'             => isset($configs['timer']['saved']) ? 'yes' : 'no'
+                        'time_period'   => 1,
+                        'time_unit'     => 'days',
+                        'message'       => 'Get 50% off before it\'s too late ⏳',
+                        'currentdatetime'   => time(),
+                        'enddatetime'       => $endTime*1000,
                     ),
                     'button'    => array(
-                        'show_button'    => isset($configs['button']['show_button']) ? $configs['button']['show_button'] : 'true',
-                        'button_link'    => isset($configs['button']['button_link']) ? $configs['button']['button_link'] : '',
-                        'button_text'    => isset($configs['button']['button_text']) ? $configs['button']['button_text'] : 'Shop now',
-                        'new_tab'        => isset($configs['button']['new_tab']) ? $configs['button']['new_tab'] : 'true'
+                        'show_button'    => 'true',
+                        'button_link'    => '',
+                        'button_text'    => 'Shop now',
+                        'new_tab'        => 'true'
                     ),
                     'styles' => array(
-                        'position'          => isset($configs['styles']['position']) ? $configs['styles']['position'] : 'bottom',
-                        'timer_color'       => isset($configs['styles']['timer_color']) ? $configs['styles']['timer_color'] : '#fff',
-                        'button_color'      => isset($configs['styles']['button_color']) ? $configs['styles']['button_color'] : '#4cca23',
-                        'background_color'  => isset($configs['styles']['background_color']) ? $configs['styles']['background_color'] : '#4c1fab',
-                        'message_color'     => isset($configs['styles']['message_color']) ? $configs['styles']['message_color'] : '#fff',
-                        'button_text_color' => isset($configs['styles']['button_text_color']) ? $configs['styles']['button_text_color'] : '#fff',
-                        'animation'         => isset($configs['styles']['animation']) ? $configs['styles']['animation'] : 'flip'
+                        'position'          => 'bottom',
+                        'timer_color'       => '#fff',
+                        'button_color'      => '#4cca23',
+                        'background_color'  => '#4c1fab',
+                        'message_color'     => '#fff',
+                        'button_text_color' => '#fff',
+                        'animation'         => 'flip'
                     )
                 )
             )
