@@ -6,7 +6,7 @@
  * Author: Light Plugins
  * Author URI: https://profiles.wordpress.org/lovelightplugins
  * License: GPLv2 or later
- * Version: 1.0.1
+ * Version: 1.1.1
  * Text Domain: ninjacountdown
  */
 
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('NINJACOUNTDOWN_VERSION')) {
-    define('NINJACOUNTDOWN_VERSION', '1.0.1');
+    define('NINJACOUNTDOWN_VERSION', '1.1.1');
     define('NINJACOUNTDOWN_DB_VERSION', 216);
     define('NINJACOUNTDOWN_MAIN_FILE', __FILE__);
     define('NINJACOUNTDOWN_BASENAME', plugin_basename(__FILE__));
@@ -26,6 +26,15 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
     {
         public function boot()
         {
+            add_action('save_post', function ($postId, $post) {
+                if(has_shortcode($post->post_content, 'ninja_countdown_layout')) {
+                    update_post_meta($postId, '_has_countdown_shortcode', true);
+                } 
+                else {
+                    update_post_meta($postId, '_has_countdown_shortcode', false);
+                }
+            }, 10, 2);
+
             $this->textDomain();
             $this->loadDependencies();
 
@@ -76,6 +85,7 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
 
         public function publicHooks()
         {
+            add_action('wp_enqueue_scripts', array($this, 'loadScripts'));
             add_shortcode('ninja_countdown_layout', function ($args) {
                 $args = shortcode_atts(array(
                     'id' => '',
@@ -89,6 +99,19 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
                 return $builder->renderCountdown($args['id']);
             });
         }
+
+        public function loadScripts()
+        {
+            wp_register_style('ninjacountdown', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
+            wp_register_script('countdown_manager', NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js', array( 'jquery' ), NINJACOUNTDOWN_VERSION, true);
+            
+            global $post;
+            
+            if( is_a( $post, 'WP_Post' ) && get_post_meta( $post->ID, '_has_countdown_shortcode', true) ) {
+                wp_enqueue_style('ninjacountdown');
+                wp_enqueue_script('countdown_manager');
+            }
+        }
     }
 
     add_action('plugins_loaded', function () {
@@ -99,3 +122,22 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
         deactivate_plugins(plugin_basename(__FILE__));
     });
 }
+
+ //elementor version start
+function ninja_countdown_timer_widget_register() {
+    require_once(NINJACOUNTDOWN_DIR . 'elementor-widget/widgets/countdown.php');
+}
+
+require_once(NINJACOUNTDOWN_DIR . 'elementor-widget/helper.php');
+add_action('elementor/widgets/widgets_registered', 'ninja_countdown_timer_widget_register');
+
+function ninja_register_frontend_styles() {
+    wp_register_style('countdown_widget_manager', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
+}
+
+function ninja_register_frontend_scripts(){
+    wp_register_script('countdown_widget_manager', NINJACOUNTDOWN_URL . 'public/js/countdown_widget.js', array( 'jquery' ), NINJACOUNTDOWN_VERSION, true);
+}
+
+add_action( 'elementor/frontend/after_register_styles', 'ninja_register_frontend_styles' );
+add_action( 'elementor/frontend/after_register_scripts', 'ninja_register_frontend_scripts' );

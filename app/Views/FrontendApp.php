@@ -36,20 +36,11 @@ class FrontendApp
 
         //dont load assets if the time is ended
         if( $distance> 0 ) {
-            wp_enqueue_style('ninjacountdown', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
             $generatedCss = $this->generateCSS( $configs );
             
             add_action('wp_footer', function () use ($generatedCss) {
                 echo "<style id='ninja_countdown_css'>". $generatedCss ."</style>";
             });
-
-            wp_enqueue_script(
-                'countdown_manager',
-                NINJACOUNTDOWN_URL . 'public/js/countdown_manager.js',
-                array( 'jquery' ),
-                NINJACOUNTDOWN_VERSION,
-                true
-            );
             
             return $this->getCountdownTimerHTML($configs);
         }

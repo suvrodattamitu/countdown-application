@@ -1,6 +1,6 @@
 <div class="nfd-container">
     <div class="nfd-row">
-        <div id="countdown-timer-wrapper ninja-wrapper-styler" class="ninja-countdown-timer-wrapper <?php echo 'timer-position-'.$styles['position']; ?> <?php echo $styles['position'] !== 'required_position' ? 'timer-floating-option-frontend' : ''; ?>">
+        <div id="ninja_countdown_timer" class="ninja-countdown-timer-wrapper <?php echo 'timer-position-'.$styles['position']; ?> <?php echo $styles['position'] !== 'required_position' ? 'timer-floating-option-frontend' : ''; ?>">
             <div class="ninja-countdown-timer-container">
                 <div class="ninja-countdown-timer">
                     <div class="ninja-countdown-timer-header">
@@ -8,13 +8,7 @@
                             <?php echo esc_html($timer['message']); ?>
                         </div>
                     </div>
-                    <script>
-                        if (!window.<?='countdown_timer_configs'?>) {
-                            window.<?='countdown_timer_configs'?> = {};
-                        }
-                        window.<?='countdown_timer_configs'?> = <?= json_encode($data) ?>;
-                    </script>
-                    <div class="ninja-countdown-timer-item-container"  id="ninja_countdown" data-end_time="<?php echo esc_html($timer['currentdatetime']); ?>" data-now="<?php echo esc_html($timer['currentdatetime']); ?>">
+                    <div class="ninja-countdown-timer-item-container"  id="ninja_countdown" data-position="<?php echo esc_html($styles['position']); ?>" data-enddatetime="<?php echo esc_html($timer['enddatetime']); ?>">
                         <div class="ninja-countdown-timer-item">
                             <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
                                 <div class="ninja-countdown-timer-item-group-inner">
@@ -50,7 +44,9 @@
                         </div>
                     <?php } ?>
                 </div>
+                <?php if($styles['position'] !== 'required_position'): ?>
                 <div class="ninja-countdown-timer-bar-close" id="close_ninja_timer"></div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

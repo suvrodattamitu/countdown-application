@@ -45,7 +45,7 @@ class Countdown
                     ),
                     'button'    => array(
                         'show_button'    => 'true',
-                        'button_link'    => '',
+                        'button_link'    => 'https://google.com',
                         'button_text'    => 'Shop Now',
                         'new_tab'        => 'true'
                     ),
@@ -76,7 +76,7 @@ class Countdown
                     ),
                     'button'    => array(
                         'show_button'    => 'true',
-                        'button_link'    => '',
+                        'button_link'    => 'https://google.com',
                         'button_text'    => 'Shop Now',
                         'new_tab'        => 'true'
                     ),
@@ -107,7 +107,7 @@ class Countdown
                     ),
                     'button'    => array(
                         'show_button'    => 'true',
-                        'button_link'    => '',
+                        'button_link'    => 'https://google.com',
                         'button_text'    => 'Shop now',
                         'new_tab'        => 'true'
                     ),

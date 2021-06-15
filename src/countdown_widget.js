@@ -1,5 +1,4 @@
-jQuery( document ).ready(function($) {
-
+(function ($) {
     let distance = 0;
     let days = 0;
     let hours = 0;
@@ -11,8 +10,8 @@ jQuery( document ).ready(function($) {
         var $countdownContainer = $scope.find(".ninja-countdown-timer-container");
         $countdownContainer.each(function () {
             let $countdownElem = $(this);
+
             let position = $countdownElem.find("#ninja_countdown").data("position");
-            
             if( position !== 'required_position') {
                 $countdownElem.find('#close_ninja_timer')[0].onclick = function(){
                     if( position === 'top' ) {
@@ -26,7 +25,6 @@ jQuery( document ).ready(function($) {
             function get_timer_value() 
             {
                 let enddatetime = parseInt($countdownElem.find("#ninja_countdown").data("enddatetime"));
-                
                 enddatetime = new Date(enddatetime);
                 distance = enddatetime - new Date();
 
@@ -42,10 +40,10 @@ jQuery( document ).ready(function($) {
                     seconds = 0;
                 }
                 
-                $countdownElem.find("#days")[0].innerHTML = days;
-                $countdownElem.find("#hours")[0].innerHTML = hours;
-                $countdownElem.find("#minutes")[0].innerHTML = minutes;
-                $countdownElem.find("#seconds")[0].innerHTML = seconds;
+                $countdownElem.find('#days')[0].innerHTML = days;
+                $countdownElem.find('#hours')[0].innerHTML = hours;
+                $countdownElem.find('#minutes')[0].innerHTML = minutes;
+                $countdownElem.find('#seconds')[0].innerHTML = seconds;
             }
 
             interval = setInterval(function() {
@@ -55,10 +53,11 @@ jQuery( document ).ready(function($) {
                     clearInterval(interval);
                 }
             }, 1000);
-        });
+        });      
     }
 
-    //Shortcode Support
-    const countdown = jQuery('.ninja-countdown-timer-wrapper');
-    countdownWidgetHandler(countdown);
-});
+    //Elementor Support
+    $(window).on("elementor/frontend/init", function () {
+        elementorFrontend.hooks.addAction("frontend/element_ready/countdown-widget.default", countdownWidgetHandler);
+    });
+}(jQuery));
