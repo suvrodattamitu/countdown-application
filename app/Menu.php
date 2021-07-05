@@ -109,7 +109,8 @@ class Menu
 
             $ninjacountdownAdminVars = apply_filters('ninjacountdown/admin_app_vars', array(
                 'assets_url' => NINJACOUNTDOWN_URL . 'public',
-                'ajaxurl' => admin_url('admin-ajax.php')
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'pro_installed' => defined('NINJA_COUNTDOWN_PRO') && NINJA_COUNTDOWN_PRO,
             ));
 
             wp_localize_script('ninjacountdown_boot', 'NinjaCountdownAdmin', $ninjacountdownAdminVars);

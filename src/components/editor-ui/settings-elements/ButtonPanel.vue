@@ -24,7 +24,7 @@
         <el-row v-if="button_configs.show_button === 'true'">
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">BUTTON Text</label>
+                    <label class="ninja_countdown_label">BUTTON TEXT</label>
                     <el-input type="text" size="mini" v-model="button_configs.button_text"></el-input>
                 </div>
             </el-col>
@@ -45,15 +45,8 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
 export default {
     props:['button_configs'],
-    data() {
-        return {
-            val:'',
-            value2:"true",
-            activeName: "1"
-        }
-    }
 }
 </script>

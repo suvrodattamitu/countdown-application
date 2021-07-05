@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue';
 
 import {
+  ElBadge,
   ElButton,
   ElButtonGroup,
   ElCheckbox,
@@ -32,10 +33,12 @@ import {
   ElTableColumn,
   ElTooltip,
   ElLoading,
-  ElMessage
+  ElMessage,
+  ElMain,
 } from 'element-plus';
 
 const components = [
+  ElBadge,
   ElButton,
   ElButtonGroup,
   ElCheckbox,
@@ -64,7 +67,8 @@ const components = [
   ElTabs,
   ElTable,
   ElTableColumn,
-  ElTooltip
+  ElTooltip,
+  ElMain,
 ]
 
 const plugins = [

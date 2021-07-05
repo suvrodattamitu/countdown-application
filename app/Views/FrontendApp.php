@@ -54,7 +54,15 @@ class FrontendApp
         }
 
         ob_start();
-        View::render('Frontend.CountdownTimer',$data);
+        ?>
+        <div class="nfd-container">
+            <div class="nfd-row">
+                <div id="ninja_countdown_timer_<?php echo $this->countdownId; ?>" class="ninja-countdown-timer-wrapper <?php echo 'timer-position-'.$data['styles']['position']; ?> <?php echo $data['styles']['position'] !== 'required_position' ? 'timer-floating-option-frontend' : ''; ?>">
+                    <?php View::render('Frontend.CountdownTimer',$data); ?>
+                </div>
+            </div>
+        </div>
+        <?php
         $generatedHtml = ob_get_clean();
 
         update_post_meta($this->countdownId, '_ninja_countdown_html', $generatedHtml);
@@ -67,21 +75,22 @@ class FrontendApp
         if ($generatedCss = get_post_meta($this->countdownId, '_ninja_countdown_css', true)) {
             return $generatedCss;
         }
-
+        
+        $prefix = '#ninja_countdown_timer_'.$this->countdownId;
         ob_start();
 		?>
 
-        .ninja-countdown-timer-container{
+        <?php echo $prefix; ?> .ninja-countdown-timer-container{
             background-color: <?php echo $configs['styles']['background_color'].'!important'; ?>;
         }
-        .ninja-countdown-timer-header-title-text{
+        <?php echo $prefix; ?> .ninja-countdown-timer-header-title-text{
             color: <?php echo $configs['styles']['message_color'].'!important';?>;
         }
-        .ninja-countdown-timer-button{
+        <?php echo $prefix; ?> .ninja-countdown-timer-button{
             background-color: <?php echo $configs['styles']['button_color'].'!important'; ?>;
             color: <?php echo $configs['styles']['button_text_color'].'!important'; ?>;
         }
-        .ninja-countdown-timer-item{
+        <?php echo $prefix; ?> .ninja-countdown-timer-item{
             color: <?php echo $configs['styles']['timer_color'].'!important'; ?>;
         }
 

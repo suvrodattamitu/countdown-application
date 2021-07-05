@@ -40,6 +40,7 @@ class Countdown
                         'time_period'   => 1,
                         'time_unit'     => 'days',
                         'message'       => 'Black Friday Sale! Get 50% off!!',
+                        'image_url' => '',
                         'currentdatetime'   => time(),
                         'enddatetime'       => $endTime*1000,
                     ),
@@ -56,7 +57,7 @@ class Countdown
                         'background_color'  => '#000000',
                         'message_color'     => '#ffec00',
                         'button_text_color' => '#000000',
-                        'animation'         => 'flip'
+                        'animation'         => ''
                     )
                 )
             ),
@@ -71,6 +72,7 @@ class Countdown
                         'time_period'   => 1,
                         'time_unit'     => 'days',
                         'message'       => 'New Year is coming!! 🎉🎉',
+                        'image_url' => '',
                         'currentdatetime'   => time(),
                         'enddatetime'       => $endTime*1000,
                     ),
@@ -87,7 +89,7 @@ class Countdown
                         'background_color'  => '#211e54',
                         'message_color'     => '#fff',
                         'button_text_color' => '#fff',
-                        'animation'         => 'flip'
+                        'animation'         => ''
                     )
                 )
             ),
@@ -102,6 +104,7 @@ class Countdown
                         'time_period'   => 1,
                         'time_unit'     => 'days',
                         'message'       => 'Get 50% off before it\'s too late ⏳',
+                        'image_url' => '',
                         'currentdatetime'   => time(),
                         'enddatetime'       => $endTime*1000,
                     ),
@@ -118,7 +121,7 @@ class Countdown
                         'background_color'  => '#4c1fab',
                         'message_color'     => '#fff',
                         'button_text_color' => '#fff',
-                        'animation'         => 'flip'
+                        'animation'         => ''
                     )
                 )
             )

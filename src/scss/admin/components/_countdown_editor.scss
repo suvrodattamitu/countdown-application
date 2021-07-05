@@ -42,10 +42,15 @@
             float: left;
             background: #fff;
             position: relative;
-            &.centered-counter-timer{
-                display: flex;
-                align-items: center;
-                justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .main_items{
+                .centered-counter-timer{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
         }
         .ninja_countdown_settings {

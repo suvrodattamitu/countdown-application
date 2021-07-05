@@ -1,11 +1,16 @@
 <?php
 namespace Elementor;
+namespace NinjaCountdown\Widgets;
+
+use Elementor\Widget_Base;
+use Elementor\Controls_Manager;
+use \Elementor\Utils;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class Countdown extends Widget_Base {
+class CountdownWidget extends Widget_Base {
 	public function get_name() {//Get the slug of the element name.
 		return 'countdown-widget';
 	}
@@ -223,13 +228,6 @@ class Countdown extends Widget_Base {
 		$this->end_controls_section();  
 	}
 	
-	/**
-	 * Render countdown timer widget output on the frontend.
-	 *
-	 * Written in PHP and used to generate the final HTML.
-	 *
-	 * @access protected
-	 */
 	protected function render() 
 	{
 		$settings = $this->get_settings();
@@ -292,15 +290,5 @@ class Countdown extends Widget_Base {
 		<?php
 	}
 
-    /**
-	 * Render countdown widget output in the editor.
-	 *
-	 * Written as a Backbone JavaScript template and used to generate the live preview.
-	 *
-	 * @access protected
-	 */
-	protected function _content_template() { 
-		 
-	}
+	protected function _content_template() {}
 }
-Plugin::instance()->widgets_manager->register_widget_type( new Countdown() );

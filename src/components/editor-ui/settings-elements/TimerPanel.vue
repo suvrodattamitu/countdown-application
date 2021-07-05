@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
@@ -9,7 +8,6 @@
                 </div>
             </el-col>
         </el-row>
-
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
@@ -25,7 +23,6 @@
                 </div>
             </el-col>
         </el-row>
-
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
@@ -35,19 +32,32 @@
             </el-col>
         </el-row>
 
+        <el-row>
+            <el-col :span="24">
+                <div class="ninja_countdown_item">
+                    <el-badge value="Pro" class="item" type="danger">
+                        <label class="ninja_countdown_label">IMAGE BEFORE TIMER</label>
+                    </el-badge>
+                    <photo-widget
+                        btn_type="primary"
+                        :btn_text="'Select File'"
+                        :btn_mode="true"
+                        @changed="updateAvatar"
+                        v-model="timer_configs.image_url"
+                    />
+                </div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
-<script>
+<script type="text/babel">
+import PhotoWidget from '../pieces/PhoroWidget.vue';
+
 export default {
     props:['timer_configs'],
     data() {
         return {
-            num:1,
-            val:'',
-            radio:'',
-            activeName: "1",
-            value1:'',
             options: [{
                 value: 'days',
                 label: 'Days'
@@ -58,6 +68,14 @@ export default {
                 value: 'minutes',
                 label: 'Minutes'
             }],
+        }
+    },
+    components: {
+        PhotoWidget
+    },
+    methods: {
+        updateAvatar(val) {
+
         }
     }
 }

@@ -8,17 +8,34 @@
                     <div v-else>
                         <div class="ninja_countdown_table">
                             <div class="fizzy_table_actions">
-                                <div class="nina_search_action">
-                                    <el-input type="text" size="medium" v-model="search_string"  @keyup.enter="getallCountdowns">
-                                        <template #suffix>
-                                            <el-button  size="medium" icon="el-icon-search" @click="getallCountdowns"></el-button>
-                                        </template>
-                                    </el-input>
+                                <div class="left_actions">
+                                    <div class="ninja_bulk_action">
+                                        <el-select v-model="bulk_value" clearable placeholder="Select" size="mini">
+                                            <el-option
+                                            v-for="item in bulkOptions"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                        <el-button class="ninja_bulk_button" size="mini"  @click="openBulkModal" type="primary">
+                                            Apply
+                                        </el-button>
+                                    </div>
                                 </div>
-                                <div class="fizzy_add_new_actions">
-                                    <el-button size="mini"  @click="showAddFormModal = true" type="primary" icon="el-icon-circle-plus">
-                                        Add Countdown
-                                    </el-button>
+                                <div class="right_actions">
+                                    <div class="nina_search_action">
+                                        <el-input type="text" size="medium" v-model="search_string"  @keyup.enter="getallCountdowns">
+                                            <template #suffix>
+                                                <el-button  size="medium" icon="el-icon-search" @click="getallCountdowns"></el-button>
+                                            </template>
+                                        </el-input>
+                                    </div>
+                                    <div class="ninja_add_new_action">
+                                        <el-button size="medium"  @click="showAddFormModal = true" type="primary" icon="el-icon-circle-plus">
+                                            Add Countdown
+                                        </el-button>
+                                    </div>
                                 </div>
                             </div>
                             <el-table
@@ -59,7 +76,6 @@
                                 label="Type"
                                 prop="post_content"
                                 >
-                                
                                 </el-table-column>
 
                                 <el-table-column
@@ -67,7 +83,7 @@
                                     width="350"
                                 >
                                 <template #default="scope">
-                                    <code class="copy"
+                                    <code class="copy_clipboard"
                                         :data-clipboard-text='`[ninja_countdown_layout id="${scope.row.ID}" ]`'>
                                         <i class="el-icon-document"></i> [ninja_countdown_layout id="{{ scope.row.ID }}"]
                                     </code>
@@ -110,6 +126,23 @@
                     </span>
                 </template>
             </el-dialog>
+
+            <!--Bulk form Confimation Modal-->
+            <el-dialog
+                    :title="`Are You Sure, You want to ${bulk_value} this Countdown?`"
+                    v-model="showBulkModal"
+                    :before-close="handleBulkClose"
+                    width="60%">
+                <div class="modal_body">
+                    <p>All the data assoscilate with this countdown will {{bulk_value}}</p>
+                </div>
+                <template #footer>
+                    <span class="dialog-footer">
+                        <el-button @click="showBulkModal = false">Cancel</el-button>
+                        <el-button type="primary" @click="bulkActionNow()">Confirm</el-button>
+                    </span>
+                </template>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -119,7 +152,7 @@
         .el-input__suffix{
             right: 0px !important;
         }
-        .fizzy_pagination{
+        .fizzy_pagination, .ninja_bulk_action{
             float:right;
             margin:15px 0px;
             .el-input__inner{
@@ -132,8 +165,14 @@
                 margin:15px 0px;
                 align-items: center;
                 justify-content: space-between;
-                .nina_search_action{
+                .ninja_bulk_button{
+                    margin-left:5px;
+                }
+                .right_actions {
                     display:flex;
+                    .ninja_add_new_action {
+                        margin-left:15px;
+                    }
                 }
             }
         }
@@ -152,6 +191,7 @@
 <script type="text/babel">
 import predefinedCountdowns from '../components/modals/predefinedCountdowns.vue';
 import Welcome from './editor-ui/pieces/Welcome.vue';
+import Clipboard from 'clipboard';
 
 export default {
     components:{
@@ -160,6 +200,15 @@ export default {
     },
     data() {
         return {
+            showBulkModal: false,
+            bulk_value: '',
+            bulkOptions: [{
+                value: '',
+                label: 'Bulk actions'
+            },{
+                value: 'delete',
+                label: 'Delete'
+            }],
             showAddFormModal: false,
             loading: false,
             allCountdowns: [],
@@ -175,6 +224,11 @@ export default {
         }
     },
     methods: {
+        openBulkModal() {
+            if(this.multipleSelection.length && this.bulk_value) {
+                this.showBulkModal = true;
+            }
+        },
         //multiple select
         handleSelectionChange(val) {
             this.multipleSelection = val;
@@ -235,9 +289,41 @@ export default {
                     this.loading = false;
                 });
         },
+        bulkActionNow() {
+            if( this.bulk_value && this.multipleSelection.length ) {
+                this.loading = true;
+                this.$adminPost({
+                    route: 'bulk_action',
+                    bulk_value: this.bulk_value,
+                    countdown_ids: JSON.stringify(this.multipleSelection)
+                })
+                    .then(response => {
+                        if( response.data ) {
+                            this.$message({
+                                showClose: true,
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            this.getallCountdowns();
+                        }
+                    }).fail(error => {
+
+                    }).always(() => {
+                        this.showBulkModal = false;
+                        this.multipleSelection = [];
+                        this.bulk_value = '';
+                        this.loading = false;
+                    });
+            }
+        },
         handleDeleteClose(){
             this.deleteDialogVisible = false;
             this.deletingCountdown = {}
+        },
+        handleBulkClose() {
+            this.showBulkModal = false;
+            this.multipleSelection = [];
+            this.bulk_value = '';
         },
         duplicateCountdown(countdown){
             this.loading = true;
@@ -260,10 +346,24 @@ export default {
                 }).always(() => {
                     this.loading = false;
                 });
+        },
+        clipboard(){
+            if( !window.clipboard ){
+                window.clipboard = new Clipboard('.copy_clipboard');
+                    window.clipboard.on('success', (e) => {
+                    let message = 'Shortcode is Copied!'
+                    this.$message({
+                        showClose: true,
+                        message: message,
+                        type: 'success'
+                    });
+                });
+            }
         }
     },
     mounted(){
-        this.getallCountdowns()
+        this.getallCountdowns();
+        this.clipboard();
     }
 }
 </script>

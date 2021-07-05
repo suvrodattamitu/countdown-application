@@ -15,13 +15,16 @@
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">Timer Animation</label>
-                    <el-select v-model="styles_configs.animation" clearable placeholder="Select" size="mini">
+                    <el-badge value="Pro" class="item" type="danger">
+                        <label class="ninja_countdown_label">Timer Animation</label>
+                    </el-badge>
+                    <el-select class="ninja_select" v-model="styles_configs.animation" clearable placeholder="Select" size="mini">
                         <el-option
                         v-for="item in options"
                         :key="item.value"
                         :label="item.label"
-                        :value="item.value">
+                        :value="item.value"
+                        :disabled="item.disabled">
                         </el-option>
                     </el-select>
                 </div>
@@ -30,80 +33,46 @@
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">Colors</label>
+                    <label class="ninja_countdown_label">COLORS :</label>
                     <div class="color-customization">
                         <div class="bgColorList">
                             <div class="block-container">
                                 <div class="title">
                                     <p>{{ 'TIMER COLOR' }}</p>
                                 </div>
-                                <div class="color-picker">
-                                    <el-color-picker
-                                        size="mini" 
-                                        v-model="styles_configs.timer_color" 
-                                        show-alpha>
-                                    </el-color-picker>
-                                </div>
+                                <color-picker v-model="styles_configs.timer_color"></color-picker>
                             </div>
                         </div>
-
                         <div class="bgColorList">
                             <div class="block-container">
                                 <div class="title">
                                     <p>{{ 'BUTTON COLOR' }}</p>
                                 </div>
-                                <div class="color-picker">
-                                    <el-color-picker
-                                        size="mini" 
-                                        v-model="styles_configs.button_color" 
-                                        show-alpha>
-                                    </el-color-picker>
-                                </div>
+                                <color-picker v-model="styles_configs.button_color"></color-picker>
                             </div>
                         </div>
-
                         <div class="bgColorList">
                             <div class="block-container">
                                 <div class="title">
                                     <p>{{ 'BUTTON TEXT COLOR' }}</p>
                                 </div>
-                                <div class="color-picker">
-                                    <el-color-picker
-                                        size="mini" 
-                                        v-model="styles_configs.button_text_color" 
-                                        show-alpha>
-                                    </el-color-picker>
-                                </div>
+                                <color-picker v-model="styles_configs.button_text_color"></color-picker>
                             </div>
                         </div>
-
                         <div class="bgColorList">
                             <div class="block-container">
                                 <div class="title">
                                     <p>{{ 'BACKGROUND COLOR' }}</p>
                                 </div>
-                                <div class="color-picker">
-                                    <el-color-picker
-                                        size="mini" 
-                                        v-model="styles_configs.background_color" 
-                                        show-alpha>
-                                    </el-color-picker>
-                                </div>
+                                <color-picker v-model="styles_configs.background_color"></color-picker>
                             </div>
                         </div>
-
                         <div class="bgColorList">
                             <div class="block-container">
                                 <div class="title">
                                     <p>{{ 'MESSAGE COLOR' }}</p>
                                 </div>
-                                <div class="color-picker">
-                                    <el-color-picker
-                                        size="mini" 
-                                        v-model="styles_configs.message_color" 
-                                        show-alpha>
-                                    </el-color-picker>
-                                </div>
+                                <color-picker v-model="styles_configs.message_color"></color-picker>
                             </div>
                         </div>
                     </div>
@@ -113,31 +82,35 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
+import ColorPicker from '../pieces/ColorPicker.vue';
+
 export default {
     props:['styles_configs'],
     data() {
         return {
-            val:'',
-            color:'',
-            activeName: "1",
             options: [{
                 value: 'none',
-                label: 'None'
+                label: 'None',
+                disabled: !this.has_pro ? true : false
                 }, {
                 value: 'flip',
-                label: 'Flip'
+                label: 'Flip',
+                disabled: !this.has_pro ? true : false
                 }, {
                 value: 'slide',
-                label: 'Slide'
+                label: 'Slide',
+                disabled: !this.has_pro ? true : false
             }],
         }
     },
-
+    components: {
+        ColorPicker
+    },
     watch: {
         styles_configs: {
             handler(val){
-                window.mitt.emit('update_css')
+                window.mitt.emit('update_css');
             },
             deep: true
         }

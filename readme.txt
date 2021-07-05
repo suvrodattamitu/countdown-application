@@ -1,9 +1,9 @@
 === Ninja Countdown | Fastest Countdown Builder ===
 Contributors: lovelightplugins
-Tags: elementor countdown addon, elementor countdown timer widget, Countdown, Countdown Builder, Countdown Timer, Timer, elementor, elementor addon
+Tags: elementor countdown addon, elementor countdown timer widget, countdown, countdown builder, countdown timer, timer, elementor, elementor addon
 Requires at least: 3.4
 Tested up to: 5.7.1
-Stable tag: 1.1.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -24,6 +24,7 @@ It is that Countdown Plugin that you expected in your plugins bucket! It just ne
 * **Organized** The plugin is well Organized to set up a new Countdown.
 * **Live Preview** You can edit and show live preview 
 * **Elementor Widget** For the Elementor experts we have Elementor Widget too.
+* **Multiple Designs** Finally we introduce Multiple Countdowns (Yes, In the same page, of course!!).
 
 == Frequently Asked Questions ==
 
@@ -34,7 +35,10 @@ Yes, You can customize everything of the Countdown timer.
 Yes, You will get countdown widget for elementor;
 
 = How many ways to show the countdown in the Frontend? =
-In 2 ways you can show your countdown timer in Frontend. 1.Elementor 2.Short Code 
+Elementor and Short Code (Gutenberge Shortcode Blocks too!!)
+
+= Does it Support multiple countdowns in the same page? =
+Of Course it does.
 
 == Screenshots ==
 
@@ -45,11 +49,17 @@ In 2 ways you can show your countdown timer in Frontend. 1.Elementor 2.Short Cod
 
 == Changelog ==
 
-= 1.1.1 (Date: June 20, 2021) =
+= 1.3.0 (Date: July 05, 2021) =
+* Added Bulk Actions
+* Copy Shortcode in Clipboard
+* Improve elementor widget
+* Improve Editor UI
+
+= 1.2.0 (Date: June 17, 2021) =
 * Multiple Shortcode Support
 * Bugs : If you are using previous version then re save the same shortcode from the edit page otherwise this version will not show your countdown properly.
 
-= 1.1.0 (Date: June 13, 2021) =
+= 1.1.1 (Date: June 13, 2021) =
 * Added Elementor Widget
 * Small bug fixing
 
@@ -60,4 +70,4 @@ In 2 ways you can show your countdown timer in Frontend. 1.Elementor 2.Short Cod
 * Fix theme compatibility
 
 = 1.0.0 (Date: May 15, 2021) =
-* Launched the Ninja Countdown Timer!
+* Launched the Ninja Countdown!

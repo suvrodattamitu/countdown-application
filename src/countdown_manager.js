@@ -1,5 +1,4 @@
 jQuery( document ).ready(function($) {
-
     let distance = 0;
     let days = 0;
     let hours = 0;

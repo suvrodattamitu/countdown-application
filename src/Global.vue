@@ -14,7 +14,7 @@
 </div>
 </template>
 
-<script>
+<script type="text/babel">
 export default {
     name: 'global_wrapper',
     data() {
@@ -22,7 +22,6 @@ export default {
             topMenus: []
         }
     },
-
     methods: {
         setTopmenu() {
             this.topMenus = [
@@ -37,7 +36,6 @@ export default {
             ]
         }
     },
-
     mounted() {
         this.setTopmenu();
     }

@@ -6,7 +6,7 @@
  * Author: Light Plugins
  * Author URI: https://profiles.wordpress.org/lovelightplugins
  * License: GPLv2 or later
- * Version: 1.1.1
+ * Version: 1.3.0
  * Text Domain: ninjacountdown
  */
 
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('NINJACOUNTDOWN_VERSION')) {
-    define('NINJACOUNTDOWN_VERSION', '1.1.1');
+    define('NINJACOUNTDOWN_VERSION', '1.3.0');
     define('NINJACOUNTDOWN_DB_VERSION', 216);
     define('NINJACOUNTDOWN_MAIN_FILE', __FILE__);
     define('NINJACOUNTDOWN_BASENAME', plugin_basename(__FILE__));
@@ -85,6 +85,9 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
 
         public function publicHooks()
         {
+            if (defined('ELEMENTOR_VERSION')) {
+                new \NinjaCountdown\Widgets\ElementorHelper();
+            }
             add_action('wp_enqueue_scripts', array($this, 'loadScripts'));
             add_shortcode('ninja_countdown_layout', function ($args) {
                 $args = shortcode_atts(array(
@@ -122,22 +125,3 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
         deactivate_plugins(plugin_basename(__FILE__));
     });
 }
-
- //elementor version start
-function ninja_countdown_timer_widget_register() {
-    require_once(NINJACOUNTDOWN_DIR . 'elementor-widget/widgets/countdown.php');
-}
-
-require_once(NINJACOUNTDOWN_DIR . 'elementor-widget/helper.php');
-add_action('elementor/widgets/widgets_registered', 'ninja_countdown_timer_widget_register');
-
-function ninja_register_frontend_styles() {
-    wp_register_style('countdown_widget_manager', NINJACOUNTDOWN_URL . 'public/css/countdown.css', array(), NINJACOUNTDOWN_VERSION);
-}
-
-function ninja_register_frontend_scripts(){
-    wp_register_script('countdown_widget_manager', NINJACOUNTDOWN_URL . 'public/js/countdown_widget.js', array( 'jquery' ), NINJACOUNTDOWN_VERSION, true);
-}
-
-add_action( 'elementor/frontend/after_register_styles', 'ninja_register_frontend_styles' );
-add_action( 'elementor/frontend/after_register_scripts', 'ninja_register_frontend_scripts' );

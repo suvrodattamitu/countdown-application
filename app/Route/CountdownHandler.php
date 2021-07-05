@@ -46,6 +46,7 @@ class CountdownHandler
             //all countdowns
             'get_all_countdowns' => 'getallCountdowns',
             'delete_countdown'   => 'deleteCountdown',
+            'bulk_action'   => 'bulkAction',
             'duplicate_countdown'=> 'duplicateCountdown',
         );
 
@@ -102,6 +103,27 @@ class CountdownHandler
         delete_post_meta($countdownId, '_ninja_countdown_css', false);
         wp_send_json_success([
             'message' => __('Countdown deleted successfully', 'ninjacountdown'),
+        ], 200);
+    }
+
+    public function bulkAction()
+    {
+        $bulkValue =  sanitize_text_field($_REQUEST['bulk_value']);
+        $countdownIds = sanitize_text_field($_REQUEST['countdown_ids']);
+        $countdownIds = json_decode(wp_unslash($countdownIds), true);
+        $countdownIds = array_filter(array_column($countdownIds, 'ID'));
+
+        if( $bulkValue === 'delete' ) {
+            foreach($countdownIds as $countdownId) {
+                wp_delete_post($countdownId, false);
+                delete_post_meta($countdownId, '_ninja_countdown_configs', false);
+                delete_post_meta($countdownId, '_ninja_countdown_html', false);
+                delete_post_meta($countdownId, '_ninja_countdown_css', false);
+            }
+        }
+
+        wp_send_json_success([
+            'message' => __("Data ${bulkValue} successfully", 'ninjacountdown')
         ], 200);
     }
 
