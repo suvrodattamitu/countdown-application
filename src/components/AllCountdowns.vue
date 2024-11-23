@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="right_actions">
                                     <div class="nina_search_action">
-                                        <el-input type="text" size="medium" v-model="search_string"  @keyup.enter="getallCountdowns">
+                                            <el-input type="text" size="medium" v-model="search_string" placeholder="Search" @keyup.enter="getallCountdowns">
                                             <template #suffix>
                                                 <el-button  size="medium" icon="el-icon-search" @click="getallCountdowns"></el-button>
                                             </template>
@@ -46,12 +46,6 @@
                                 <el-table-column
                                 type="selection"
                                 width="55">
-                                </el-table-column>
-
-                                <el-table-column type="expand">
-                                <template #default="props">
-                                    <p>Title: {{ props.row.post_title }}</p>
-                                </template>
                                 </el-table-column>
 
                                 <el-table-column

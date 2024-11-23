@@ -6,7 +6,7 @@
  * Author: Light Plugins
  * Author URI: https://profiles.wordpress.org/lovelightplugins
  * License: GPLv2 or later
- * Version: 1.3.0
+ * Version: 1.4.0
  * Text Domain: ninjacountdown
  */
 
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('NINJACOUNTDOWN_VERSION')) {
-    define('NINJACOUNTDOWN_VERSION', '1.3.0');
+    define('NINJACOUNTDOWN_VERSION', '1.4.0');
     define('NINJACOUNTDOWN_DB_VERSION', 216);
     define('NINJACOUNTDOWN_MAIN_FILE', __FILE__);
     define('NINJACOUNTDOWN_BASENAME', plugin_basename(__FILE__));

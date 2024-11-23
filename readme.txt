@@ -1,9 +1,10 @@
 === Ninja Countdown | Fastest Countdown Builder ===
 Contributors: lovelightplugins
 Tags: elementor countdown addon, elementor countdown timer widget, countdown, countdown builder, countdown timer, timer, elementor, elementor addon
-Requires at least: 3.4
-Tested up to: 5.7.1
-Stable tag: 1.3.0
+Requires at least: 4.5
+Tested up to: 6.7.1
+Stable tag: 1.4.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -48,6 +49,9 @@ Of Course it does.
 4. Elementor Widget
 
 == Changelog ==
+
+= 1.4.0 (Date: November 23, 2024) =
+* Compatibility check with latest WordPress & PHP 8.2
 
 = 1.3.0 (Date: July 05, 2021) =
 * Added Bulk Actions

@@ -123,7 +123,7 @@ class CountdownHandler
         }
 
         wp_send_json_success([
-            'message' => __("Data ${bulkValue} successfully", 'ninjacountdown')
+            'message' => __("Data ". $bulkValue ." successfully", 'ninjacountdown')
         ], 200);
     }
 
