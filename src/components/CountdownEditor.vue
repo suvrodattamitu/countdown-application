@@ -44,6 +44,12 @@
                             </el-tab-pane>
                             <el-tab-pane>
                                 <template #label>
+                                    <span class="icon-style"><i class="el-icon-picture"></i>Image</span>
+                                </template>
+                                <image-panel :image_configs="countdown_meta.image"></image-panel>
+                            </el-tab-pane>
+                            <el-tab-pane>
+                                <template #label>
                                     <span class="icon-style"><i class="el-icon-video-play"></i>Button</span>
                                 </template>
                                 <button-panel :button_configs="countdown_meta.button"></button-panel>
@@ -66,6 +72,7 @@
 import Countdown from '../components/editor-ui/countdown-timer/CountdownTimer';
 import StylePanel from '../components/editor-ui/settings-elements/StylePanel';
 import ButtonPanel from '../components/editor-ui/settings-elements/ButtonPanel';
+import ImagePanel from '../components/editor-ui/settings-elements/ImagePanel';
 import TimerPanel from '../components/editor-ui/settings-elements/TimerPanel';
 import Remove from '../components/editor-ui/pieces/Remove';
 import Clipboard from 'clipboard';
@@ -76,6 +83,7 @@ export default {
         StylePanel,
         TimerPanel,
         ButtonPanel,
+        ImagePanel,
         Remove
     },
     data() {

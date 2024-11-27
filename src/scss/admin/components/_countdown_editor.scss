@@ -52,6 +52,10 @@
                     justify-content: center;
                 }
             }
+
+            .ninja-countdown-timer-header-title-text {
+                max-width: 200px;
+            }
         }
         .ninja_countdown_settings {
             width: 29%;
@@ -93,14 +97,19 @@
             .el-tabs__nav-scroll{
                 border-bottom:2px solid #000;
             }
-            .el-tabs__item{
+            .el-tabs__item {
                 color: #fff;
+                padding-right: 20px;
                 &.is-active{
                     color: #36a0e7;
                     background-color: #38393a;
                     border-right-color: #38393a;
                     border-left-color: #38393a;
                     border-bottom: 2px solid #36a0e7;
+                }
+
+                &:nth-child(2) {
+                    padding: 0px;
                 }
             }
         }
@@ -110,4 +119,8 @@
     i{
         margin-right:5px;
     }
+}
+
+.ninja_countdown_preview {
+
 }

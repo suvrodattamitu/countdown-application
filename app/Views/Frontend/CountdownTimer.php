@@ -5,6 +5,14 @@
                 <?php echo esc_html($timer['message']); ?>
             </div>
         </div>
+
+        <?php 
+        if ($image['show_image'] === 'true' && $image['position'] === 'before_timer') {?>
+            <div class="ninja-countdown-timer-img before_timer">
+                <img src="<?php echo esc_html($image['url']); ?>" />
+            </div>
+        <?php } ?>
+
         <div class="ninja-countdown-timer-item-container"  id="ninja_countdown" data-position="<?php echo esc_html($styles['position']); ?>" data-enddatetime="<?php echo esc_html($timer['enddatetime']); ?>">
             <div class="ninja-countdown-timer-item">
                 <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
@@ -33,6 +41,13 @@
                 </div>
             </div>
         </div>
+
+        <?php if ($image['show_image'] === 'true' && $image['position'] === 'after_timer') {?>
+            <div class="ninja-countdown-timer-img after_timer">
+                <img src="<?php echo esc_html($image['url']); ?>" />
+            </div>
+        <?php } ?>
+
         <?php if( $button['show_button'] === 'true' ) {?>
             <div class="ninja-countdown-timer-button-container">
                 <a class="ninja-countdown-timer-button" href="<?php echo esc_url($button['button_link']); ?>" target="<?php echo $button['new_tab'] === 'true' ? '_blank' : '' ?>">

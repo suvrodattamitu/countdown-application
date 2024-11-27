@@ -49,9 +49,9 @@ class FrontendApp
     public function getCountdownTimerHTML($data)
     {
         $generatedHtml = '';
-        if ($generatedHtml = get_post_meta($this->countdownId, '_ninja_countdown_html', true)) {
-            return $generatedHtml;
-        }
+        // if ($generatedHtml = get_post_meta($this->countdownId, '_ninja_countdown_html', true)) {
+        //     return $generatedHtml;
+        // }
 
         ob_start();
         ?>

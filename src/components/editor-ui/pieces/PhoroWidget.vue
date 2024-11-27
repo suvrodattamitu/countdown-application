@@ -7,7 +7,7 @@
                 </div>
                 <i class="el-icon-upload fizzy-upload-icon"></i>
                 <p>Browse for a file to upload</p>
-                <el-button :disabled="!has_pro ? true : false" size="small" @click="initUploader" :type="btn_type">{{btn_text}}</el-button>
+                <el-button size="small" @click="initUploader" :type="btn_type">{{btn_text}}</el-button>
             </div>
         </div>
     </div>

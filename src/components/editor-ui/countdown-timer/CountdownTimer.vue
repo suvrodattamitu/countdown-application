@@ -10,6 +10,9 @@
                                     {{ all_configs.timer.message }}
                                 </div>
                             </div>
+                            <div class="ninja-countdown-timer-img before_timer" v-if="all_configs.image.show_image === 'true' && all_configs.image.position === 'before_timer'">
+                                <img :src="all_configs.image.url" />
+                            </div>
                             <div class="ninja-countdown-timer-item-container">
                                 <div class="ninja-countdown-timer-item">
                                     <div class="ninja-countdown-timer-item-group ninja-countdown-timer-item-group-days">
@@ -40,6 +43,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="ninja-countdown-timer-img after_timer" v-if="all_configs.image.show_image === 'true' && all_configs.image.position === 'after_timer'">
+                                <img :src="all_configs.image.url" />
+                            </div>
                             <div class="ninja-countdown-timer-button-container" v-if="all_configs.button.show_button === 'true'">
                                 <a class="ninja-countdown-timer-button" :href="all_configs.button.button_link" :target="all_configs.button.new_tab ==='true' ? '_blank':'' ">
                                     {{ all_configs.button.button_text }}
@@ -60,6 +66,7 @@ export default {
 
     data() {
         return {
+            assets_url: window.NinjaCountdownAdmin.assets_url,
             distance:0,
             days: 0,
             hours: 0,

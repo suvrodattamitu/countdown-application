@@ -3,16 +3,21 @@
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">REMAINING TIME PERIOD</label>
-                    <el-input-number v-model="timer_configs.time_period" size="mini" :min="1" :max="10"></el-input-number>
+                    <label class="ninja_countdown_label">SHOW IMAGE</label>
+                    <el-switch
+                    v-model="image_configs.show_image"
+                    active-value="true"
+                    inactive-value="false"
+                    active-color="#13ce66">
+                    </el-switch>
                 </div>
             </el-col>
         </el-row>
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">SET THE TIME IN</label>
-                    <el-select v-model="timer_configs.time_unit" clearable placeholder="Select" size="mini">
+                    <label class="ninja_countdown_label">IMAGE POSITION</label>
+                    <el-select v-model="image_configs.position" clearable placeholder="Select" size="mini">
                         <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -23,11 +28,18 @@
                 </div>
             </el-col>
         </el-row>
+
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">MESSAGE BEFORE TIMER</label>
-                    <el-input type="text" v-model="timer_configs.message"></el-input>
+                    <label class="ninja_countdown_label">IMAGE</label>
+                    <photo-widget
+                        btn_type="primary"
+                        :btn_text="'Select File'"
+                        :btn_mode="true"
+                        @changed="updateAvatar"
+                        v-model="image_configs.url"
+                    />
                 </div>
             </el-col>
         </el-row>
@@ -38,19 +50,17 @@
 import PhotoWidget from '../pieces/PhoroWidget.vue';
 
 export default {
-    props:['timer_configs'],
+    props:['image_configs'],
     data() {
         return {
             options: [{
-                value: 'days',
-                label: 'Days'
-                }, {
-                value: 'hours',
-                label: 'Hours'
-                }, {
-                value: 'minutes',
-                label: 'Minutes'
-            }],
+                value: 'before_timer',
+                label: 'Before Timer'
+            }, 
+            {
+                value: 'after_timer',
+                label: 'After Timer'
+            }]
         }
     },
     components: {

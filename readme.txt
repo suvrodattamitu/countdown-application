@@ -1,6 +1,6 @@
 === Ninja Countdown | Fastest Countdown Builder ===
 Contributors: lovelightplugins
-Tags: elementor countdown addon, elementor countdown timer widget, countdown, countdown builder, countdown timer, timer, elementor, elementor addon
+Tags: elementor countdown addon, countdown, countdown builder, countdown timer, timer
 Requires at least: 4.5
 Tested up to: 6.7.1
 Stable tag: 1.4.0

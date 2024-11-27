@@ -16,9 +16,9 @@
             <el-col :span="24">
                 <div class="ninja_countdown_item">
                     <el-badge value="Pro" class="item" type="danger">
-                        <label class="ninja_countdown_label">Timer Animation</label>
-                    </el-badge>
-                    <el-select class="ninja_select" v-model="styles_configs.animation" clearable placeholder="Select" size="mini">
+                        <label class="ninja_countdown_label">TIMER ANIMATION</label>
+                    </el-badge> <br>
+                    <el-select v-model="styles_configs.animation" clearable placeholder="Select" size="mini">
                         <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -33,7 +33,7 @@
         <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
-                    <label class="ninja_countdown_label">COLORS :</label>
+                    <label class="ninja_countdown_label">COLORS</label>
                     <div class="color-customization">
                         <div class="bgColorList">
                             <div class="block-container">

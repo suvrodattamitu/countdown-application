@@ -58,6 +58,11 @@ class Countdown
                         'message_color'     => '#ffec00',
                         'button_text_color' => '#000000',
                         'animation'         => ''
+                    ),
+                    'image' => array(
+                        'show_image'    => 'false',
+                        'position'      => 'before_timer',
+                        'url'           => ''
                     )
                 )
             ),
@@ -90,6 +95,11 @@ class Countdown
                         'message_color'     => '#fff',
                         'button_text_color' => '#fff',
                         'animation'         => ''
+                    ),
+                    'image' => array(
+                        'show_image'    => 'false',
+                        'position'      => 'before_timer',
+                        'url'           => ''
                     )
                 )
             ),
@@ -122,6 +132,48 @@ class Countdown
                         'message_color'     => '#fff',
                         'button_text_color' => '#fff',
                         'animation'         => ''
+                    ),
+                    'image' => array(
+                        'show_image'    => 'false',
+                        'position'      => 'before_timer',
+                        'url'           => ''
+                    )
+                )
+            ),
+
+            'haloween_countdown'  => array(
+                'title' => 'Haloween',
+                'image'      => $asset_url.'/images/countdowns/haloween_offer.png',
+                'layout_type' => 'Haloween',
+                
+                'settings'  => array(
+                    'timer' => array(
+                        'time_period'   => 1,
+                        'time_unit'     => 'days',
+                        'message'       => "🎃🎃 Limited-time Haloween offer! 🎃🎃",
+                        'image_url' => '',
+                        'currentdatetime'   => time(),
+                        'enddatetime'       => $endTime*1000,
+                    ),
+                    'button'    => array(
+                        'show_button'    => 'true',
+                        'button_link'    => 'https://google.com',
+                        'button_text'    => 'Shop now',
+                        'new_tab'        => 'true'
+                    ),
+                    'styles' => array(
+                        'position'          => 'required_position',
+                        'timer_color'       => '#fff',
+                        'button_color'      => '#FF8C00',
+                        'background_color'  => '#060111',
+                        'message_color'     => '#fff',
+                        'button_text_color' => '#fff',
+                        'animation'         => ''
+                    ),
+                    'image' => array(
+                        'show_image'    => 'true',
+                        'position'      => 'before_timer',
+                        'url'           => $asset_url . '/images/support/haloween.png'
                     )
                 )
             )

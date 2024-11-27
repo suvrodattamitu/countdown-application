@@ -81,6 +81,10 @@ if (!defined('NINJACOUNTDOWN_VERSION')) {
                     remove_all_actions('admin_notices');
                 }
             });
+
+            add_action('admin_enqueue_scripts', function() {
+                wp_enqueue_media();
+            });
         }
 
         public function publicHooks()
